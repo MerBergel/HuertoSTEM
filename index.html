@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Interactivo | Proyecto Huerto STEAM</title>
+
+  <!-- Tailwind + Chart.js + Fuentes -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- Tus estilos -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="text-stone-800">
+<div class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <span class="text-2xl font-black text-green-700">Sembrando Futuro</span>
+        </div>
+        <nav class="hidden md:flex space-x-6">
+          <a href="#proyecto" data-target="proyecto" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">El Proyecto</a>
+          <a href="#cronograma" data-target="cronograma" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Cronograma</a>
+          <a href="#planificacion" data-target="planificacion" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Planificación</a>
+          <a href="#areas" data-target="areas" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Áreas STEAM</a>
+          <a href="#evaluacion" data-target="evaluacion" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Evaluación</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- El Proyecto -->
+    <section id="proyecto" class="content-section">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-stone-900 sm:text-5xl md:text-6xl">Un Vistazo al Proyecto</h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
+          "Sembrando Futuro" integra Ciencia, Tecnología, Ingeniería, Arte y Matemáticas a través de un huerto escolar.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-bold text-green-800 mb-2">Justificación</h3>
+          <p class="text-stone-600">Entorno manipulativo, inclusivo y motivador, conectando currículo y sostenibilidad.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-bold text-green-800 mb-2">Objetivos Generales</h3>
+          <ul class="list-disc list-inside text-stone-600 space-y-1">
+            <li>Integrar las disciplinas STEAM.</li>
+            <li>Fomentar el aprendizaje activo y cooperativo.</li>
+            <li>Desarrollar la competencia digital.</li>
+            <li>Impulsar la conciencia medioambiental y el servicio.</li>
+          </ul>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-bold text-green-800 mb-2">Metodologías Activas</h3>
+          <ul class="list-disc list-inside text-stone-600 space-y-1">
+            <li>ABP</li>
+            <li>Aprendizaje cooperativo</li>
+            <li>Gamificación</li>
+            <li>Aprendizaje-Servicio</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cronograma -->
+    <section id="cronograma" class="content-section">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-stone-900">Cronograma Interactivo</h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Selecciona un trimestre para explorar las actividades.</p>
+      </div>
+      <div class="flex justify-center space-x-4 mb-8">
+        <button data-trimestre="1" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">1º Trimestre</button>
+        <button data-trimestre="2" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">2º Trimestre</button>
+        <button data-trimestre="3" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">3º Trimestre</button>
+      </div>
+      <div id="timeline-content" class="bg-white p-8 rounded-lg shadow-lg"></div>
+      <div class="text-center mt-6">
+        <a href="#planificacion" data-target="planificacion" class="inline-block nav-link font-bold text-green-700">Ver detalle mensual ↓</a>
+      </div>
+    </section>
+
+    <!-- Planificación -->
+    <section id="planificacion" class="content-section">
+      <div class="text-center mb-8">
+        <h1 class="text-4xl font-extrabold text-stone-900">Planificación Mensual Detallada</h1>
+        <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">Desglose por trimestres → meses → semanas (9 sesiones/semana).</p>
+        <div class="mt-4 flex items-center justify-center gap-3">
+          <button id="expandAll" class="px-4 py-2 rounded-md bg-stone-900 text-white text-sm">Expandir todo</button>
+          <button id="collapseAll" class="px-4 py-2 rounded-md bg-stone-200 text-stone-800 text-sm">Contraer todo</button>
+          <button id="printPlan" class="px-4 py-2 rounded-md bg-green-700 text-white text-sm">Imprimir / PDF</button>
+        </div>
+      </div>
+
+      <!-- T1 -->
+      <div class="bg-white rounded-xl shadow-lg mb-6">
+        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
+                aria-expanded="false" data-target="t1">
+          <span>Trimestre 1 · Diseño y Planificación (sept–dic)</span>
+          <span class="chev transition-transform">▾</span>
+        </button>
+        <div id="t1" class="hidden p-6 space-y-6">
+          <!-- Septiembre -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Septiembre · ¡Arrancamos! (≈3,5 semanas · ~32 sesiones) · Objetivo: bases del proyecto y U1</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 1 (10–13 sept) · ~7 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Lanzamiento del reto, roles, cohesión.</li>
+                  <li><b>U1 (3):</b> Método científico aplicado al huerto.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 2 (16–20 sept) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Operación Terreno: medidas, luz, viento, puntos de agua. Arranque del Cuaderno de Campo digital.</li>
+                  <li><b>U1-Mat (4):</b> Áreas (m²), fracciones, potencias, radicales.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 3 (23–27 sept) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Misión Suelo: recogida de muestras. Creación del blog y primera entrada.</li>
+                  <li><b>U1-FyQ (4):</b> Estados de la materia conectados al huerto.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 4 (30 sept–4 oct) · 7 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (3):</b> Laboratorio de Suelo (textura, pH) y registro.</li>
+                  <li><b>U2-FyQ (4):</b> Mezclas y disoluciones (nutrientes).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Octubre -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Octubre · Fase de diseño (≈4 semanas · ~34 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 5 (7–11 oct) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Planos a escala + investigación botánica (5–7 cultivos).</li>
+                  <li><b>U2-Mat (4):</b> Proporcionalidad aplicada a planos.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 6 (14–18 oct) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Cálculo de superficies/volúmenes; bocetos y estética.</li>
+                  <li><b>U2-Bio & U1-Tec (5):</b> Sol y estaciones; máquinas y mecanismos.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 7 (21–25 oct) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Maquetas 3D con materiales reciclados.</li>
+                  <li><b>U2/U1 refuerzo (4):</b> Consolidación y dudas.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 8 (28–31 oct) · 7 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Fotos y documentación de maquetas.</li>
+                  <li><b>U2-Tec (3):</b> Electricidad y electrónica (base para Arduino).</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Noviembre-Diciembre -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Noviembre–Diciembre · Tecnología y presentación (≈6 semanas · ~44 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semanas 9–10 (4–15 nov) · ~16 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (8):</b> “Hola, Arduino”: LED, sensor temp., lectura básica.</li>
+                  <li><b>U2–U3 Tec (8):</b> Circuito, voltaje, resistencia, seguridad.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 11 (18–22 nov) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Ideas tecnológicas + guion de presentación.</li>
+                  <li><b>U3-FyQ (5):</b> Átomo y tabla periódica; N-P-K en nutrición vegetal.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semanas 12–13 (25 nov–5 dic) · ~16 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (8):</b> Ensayo de presentaciones; soporte visual.</li>
+                  <li><b>U2–U3 (8):</b> Cierre y repaso.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 14 (10–13 dic) · 7 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (7):</b> Defensa de proyectos, votación, artículo en el blog.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 15 (16–20 dic) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (2):</b> Auto/coevaluación del trimestre.</li>
+                  <li><b>Uds. (7):</b> Repaso y evaluación trimestral.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- T2 -->
+      <div class="bg-white rounded-xl shadow-lg mb-6">
+        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
+                aria-expanded="false" data-target="t2">
+          <span>Trimestre 2 · Construcción y Desarrollo (ene–mar)</span>
+          <span class="chev transition-transform">▾</span>
+        </button>
+        <div id="t2" class="hidden p-6 space-y-6">
+          <!-- Enero -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Enero · Manos a la tierra (≈4 semanas · ~33 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 16 (8–10 ene) · ~5 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (3):</b> Plan de obra y materiales; entrada en el blog.</li>
+                  <li><b>U3-ByG (2):</b> Capas de la Tierra ↔ capas del bancal.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 17 (13–17 ene) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Preparación del terreno y construcción de bancales.</li>
+                  <li><b>U4-Mat (4):</b> Expresiones y polinomios para materiales/volúmenes.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 18 (20–24 ene) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Semilleros y mezcla de sustrato.</li>
+                  <li><b>U4-FyQ (4):</b> Formulación inorgánica (nitratos, fosfatos…).</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 19 (27–31 ene) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Finalizar y ubicar bancales según plano.</li>
+                  <li><b>U4-Tec (5):</b> Instalación eléctrica básica/electrónica.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Febrero -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Febrero · Siembra y tecnología (≈4 semanas · ~36 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 20 (3–7 feb) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Siembra directa + Riego v1 (bomba, tubos, goteros).</li>
+                  <li><b>U5-FyQ (4):</b> Cambios químicos; fotosíntesis.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 21 (10–14 feb) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Riego v2 con Arduino (relé + sensor humedad) y primeras pruebas de código.</li>
+                  <li><b>U5-Mat (4):</b> Ecuaciones/inecuaciones con consumos de agua.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 22 (17–21 feb) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Plantillas de datos (temp./humedad/altura). App de registro – MIT App Inventor (parte 1).</li>
+                  <li><b>U5-Bio (5):</b> Origen de la vida y ciclo de las plantas.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 23 (24–28 feb) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Trasplantes y actualización del blog con avances.</li>
+                  <li><b>U5-Tec (4):</b> Web y redes: buenas prácticas y publicación.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Marzo -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Marzo · Crecimiento y datos (≈4 semanas · ~29 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semanas 24–25 (3–14 mar) · ~18 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (8):</b> Ajuste del riego automático y primeras gráficas en hojas de cálculo; etiquetado bilingüe.</li>
+                  <li><b>Uds. (10):</b> Cierre de la 5 y repaso del trimestre.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semanas 26–27 (17–28 mar) · ~11 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Mantenimiento, observación, reflexión y autoevaluación.</li>
+                  <li><b>Uds. (7):</b> Repaso y evaluación trimestral.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- T3 -->
+      <div class="bg-white rounded-xl shadow-lg">
+        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
+                aria-expanded="false" data-target="t3">
+          <span>Trimestre 3 · Crecimiento y Cosecha (abr–jun)</span>
+          <span class="chev transition-transform">▾</span>
+        </button>
+        <div id="t3" class="hidden p-6 space-y-6">
+          <!-- Abril -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Abril · Crecimiento y análisis (≈3,5 semanas · ~29 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 28 (7–11 abr) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Mantenimiento post-vacaciones; Estadística I (media, mediana, moda).</li>
+                  <li><b>U9-Mat (4):</b> Estadística y probabilidad con datos reales.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 29 (21–25 abr) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Control de plagas ecológico; visualización avanzada.</li>
+                  <li><b>U6-Bio (4):</b> Célula, mitosis, fotosíntesis/respiración.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 30 (28–30 abr) · ~5 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (3):</b> Planificación del Mercadillo (parte 1).</li>
+                  <li><b>U6-FyQ (2):</b> Reacciones en compost y fotosíntesis.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mayo -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Mayo · Cosecha y organización (≈4 semanas · ~34 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semanas 31–32 (5–16 may) · ~18 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (10):</b> Primeras cosechas; preparación de productos; cartelería y RRSS.</li>
+                  <li><b>U7-Bio & U8-Tec (8):</b> Genes/variedades; repaso y optimización del código del riego.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semanas 33–34 (19–30 may) · ~18 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (9):</b> Logística del mercadillo; edición del vídeo-resumen; difusión.</li>
+                  <li><b>U9-Bio (9):</b> Mendel con ejemplos del huerto; repaso general.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Junio -->
+          <div class="rounded-lg border border-green-100">
+            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Junio · Evento final y cierre (≈3 semanas · ~27 sesiones)</div>
+            <div class="p-4 space-y-4 text-stone-700">
+              <div>
+                <h4 class="font-bold">Semana 35 (2–6 jun) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (6):</b> Semana del Mercadillo; contabilidad y donación.</li>
+                  <li><b>Uds. (3):</b> Repaso final.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 36 (9–13 jun) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (5):</b> Presentaciones finales, estreno del vídeo y post final.</li>
+                  <li><b>Uds. (4):</b> Evaluaciones finales.</li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="font-bold">Semana 37 (16–20 jun) · 9 sesiones</h4>
+                <ul class="list-disc list-inside">
+                  <li><b>Proyecto (4):</b> Desmontaje y limpieza; celebración e insignias.</li>
+                  <li><b>Uds. (5):</b> Recuperaciones y cierre.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Áreas STEAM -->
+    <section id="areas" class="content-section">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-stone-900">Explora las Áreas STEAM</h1>
+        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Haz clic en un área para ver actividades asociadas.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+        <div data-area="cientifico" class="steam-card p-6 bg-green-100 rounded-lg cursor-pointer hover:bg-green-200 transition-colors"><h3 class="text-xl font-bold text-green-800">Científico-Matemático</h3></div>
+        <div data-area="tecnologico" class="steam-card p-6 bg-blue-100 rounded-lg cursor-pointer hover:bg-blue-200 transition-colors"><h3 class="text-xl font-bold text-blue-800">Tecnológico</h3></div>
+        <div data-area="artistico" class="steam-card p-6 bg-yellow-100 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors"><h3 class="text-xl font-bold text-yellow-800">Artístico y Social</h3></div>
+        <div data-area="linguistico" class="steam-card p-6 bg-red-100 rounded-lg cursor-pointer hover:bg-red-200 transition-colors"><h3 class="text-xl font-bold text-red-800">Lingüístico</h3></div>
+      </div>
+      <div id="steam-content" class="mt-8 bg-white p-8 rounded-lg shadow-lg min-h-[300px]"></div>
+
+      <div id="chart-area" class="hidden mt-8">
+        <h2 class="text-2xl font-bold text-center text-stone-800 mb-4">Ejemplo de Visualización de Datos</h2>
+        <p class="text-center text-stone-600 mb-4">Altura de plantas por semanas.</p>
+        <div class="chart-container"><canvas id="growthChart"></canvas></div>
+        <div class="text-center mt-4">
+          <button id="addDataBtn" class="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700">Añadir Dato Semanal</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluación -->
+    <section id="evaluacion" class="content-section">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-stone-900">¿Cómo Evaluamos?</h1>
+      </div>
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold">R</div>
+          <div><h3 class="text-lg font-bold">Rúbricas</h3><p class="text-stone-600">Trabajo en equipo, orales, cuaderno de campo e hitos.</p></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold">P</div>
+          <div><h3 class="text-lg font-bold">Portfolio digital</h3><p class="text-stone-600">Cuaderno y blog como evidencias.</p></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">O</div>
+          <div><h3 class="text-lg font-bold">Observación</h3><p class="text-stone-600">Registro del trabajo diario.</p></div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold">A</div>
+          <div><h3 class="text-lg font-bold">Auto/coevaluación</h3><p class="text-stone-600">Equipos valoran su desempeño.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-stone-800 text-white mt-12">
+    <div class="container mx-auto px-6 py-6 text-center">
+      <p class="font-bold">IES en Móstoles, Comunidad de Madrid</p>
+      <p class="text-sm text-stone-400">Curso 2024-2025</p>
+    </div>
+  </footer>
+</div>
+
+<!-- Tu JS -->
+<script src="script.js" defer></script>
+</body>
+</html>
