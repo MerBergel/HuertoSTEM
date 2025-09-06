@@ -482,4 +482,95 @@ document.getElementById('loadCSV')?.addEventListener('click',()=>loadCSVtoChart(
   render();
 })();
 
+/* ===========================
+   Cronograma de Hitos 2025–2026
+   =========================== */
+(function(){
+  const $list = document.getElementById('timelineList');
+  if (!$list) return;
+
+  // Utilidad para formatear rango de fechas en ES
+  const fmt = (d) => new Intl.DateTimeFormat('es-ES', { day:'2-digit', month:'short', year:'numeric' }).format(d).replace('.', '');
+  function rango(a, b){
+    const da = new Date(a), db = b ? new Date(b) : null;
+    if (!db) return fmt(da);
+    const sameMonth = da.getFullYear()===db.getFullYear() && da.getMonth()===db.getMonth();
+    if (sameMonth) {
+      // 03–14 nov 2025
+      const diaA = String(da.getDate()).padStart(2,'0');
+      const diaB = String(db.getDate()).padStart(2,'0');
+      const mesY = new Intl.DateTimeFormat('es-ES',{ month:'short', year:'numeric'}).format(db).replace('.', '');
+      return `${diaA}–${diaB} ${mesY}`;
+    }
+    return `${fmt(da)} – ${fmt(db)}`;
+  }
+
+  // Datos de hitos (trimestre: 1,2,3)
+  const HITOS = [
+    { tri:1, start:'2025-09-08',                end:null,         titulo:'Inicio del proyecto',                       desc:'Lanzamiento del reto anual y organización de equipos.', tag:'Inicio' },
+    { tri:1, start:'2025-11-03',                end:'2025-11-14', titulo:'Bloque "Hola Arduino"',                    desc:'Entradas/salidas, LED y sensor de temperatura.',         tag:'Tecnología' },
+    { tri:1, start:'2025-12-09',                end:'2025-12-12', titulo:'Defensa T1 + Votación',                    desc:'Presentación de diseños y elección para T2.',           tag:'Presentación' },
+    { tri:2, start:'2026-01-07',                end:'2026-01-09', titulo:'Inicio de construcción',                   desc:'Plan de obra, materiales y organización en bancales.',  tag:'Construcción' },
+    { tri:2, start:'2026-02-03',                end:'2026-02-07', titulo:'Siembra + Riego v1',                       desc:'Siembra directa y riego con bomba/goteros.',            tag:'Agronomía' },
+    { tri:2, start:'2026-02-09',                end:'2026-02-13', titulo:'Riego v2 con Arduino',                     desc:'Relé + sensor de humedad y primeras automatizaciones.', tag:'Tecnología' },
+    { tri:2, start:'2026-02-23',                end:'2026-02-27', titulo:'Trasplantes + entrada en el blog',         desc:'Trasplante de plantones y difusión.',                    tag:'Comunicación' },
+    { tri:2, start:'2026-03-02',                end:'2026-03-13', titulo:'Ajuste de riego + primeras gráficas',      desc:'Calibración y visualización de datos.',                 tag:'Datos' },
+    { tri:3, start:'2026-04-07',                end:'2026-04-10', titulo:'Estadística I (media/mediana/moda)',       desc:'Análisis con datos reales del huerto.',                 tag:'Ciencia' },
+    { tri:3, start:'2026-06-02',                end:'2026-06-06', titulo:'Semana del Mercadillo Solidario',          desc:'Organización, venta y donación.',                       tag:'Servicio' },
+    { tri:3, start:'2026-06-09',                end:'2026-06-13', titulo:'Presentaciones finales + vídeo',           desc:'Defensa final y estreno del vídeo-resumen.',            tag:'Presentación' },
+    { tri:3, start:'2026-06-16',                end:'2026-06-20', titulo:'Desmontaje y cierre',                      desc:'Mantenimiento, limpieza y celebración final.',          tag:'Cierre' },
+  ]
+  .map(h=>({ ...h, d0: new Date(h.start), d1: h.end ? new Date(h.end) : null }))
+  .sort((a,b)=> a.d0 - b.d0);
+
+  function chip(text){
+    const palette = {
+      'Inicio':'bg-emerald-100 text-emerald-700',
+      'Tecnología':'bg-blue-100 text-blue-700',
+      'Presentación':'bg-purple-100 text-purple-700',
+      'Construcción':'bg-amber-100 text-amber-700',
+      'Agronomía':'bg-lime-100 text-lime-700',
+      'Comunicación':'bg-sky-100 text-sky-700',
+      'Datos':'bg-cyan-100 text-cyan-700',
+      'Ciencia':'bg-rose-100 text-rose-700',
+      'Servicio':'bg-orange-100 text-orange-700',
+      'Cierre':'bg-stone-100 text-stone-700'
+    };
+    const cls = palette[text] || 'bg-stone-100 text-stone-700';
+    return `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold ${cls}">${text}</span>`;
+  }
+
+  function itemHTML(h){
+    const fecha = rango(h.start, h.end);
+    return `
+      <div class="relative ml-2">
+        <!-- punto -->
+        <span class="absolute -left-2 top-2 w-3 h-3 rounded-full bg-green-600 border-2 border-white shadow"></span>
+        <div class="bg-white border border-stone-200 rounded-lg p-3 shadow-sm">
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-sm font-bold text-stone-900">${fecha}</p>
+            ${chip(h.tag)}
+          </div>
+          <h4 class="mt-1 font-bold text-stone-900">${h.titulo}</h4>
+          <p class="text-sm text-stone-600">${h.desc}</p>
+          <p class="text-xs text-stone-400 mt-1">Trimestre ${h.tri}</p>
+        </div>
+      </div>`;
+  }
+
+  function render(tri='all'){
+    const data = tri==='all' ? HITOS : HITOS.filter(h=>String(h.tri)===String(tri));
+    $list.innerHTML = data.map(itemHTML).join('');
+  }
+
+  // Controles
+  document.querySelectorAll('[data-crono-filter]').forEach(btn=>{
+    btn.addEventListener('click', ()=> render(btn.getAttribute('data-crono-filter')));
+  });
+  document.getElementById('printTimeline')?.addEventListener('click', ()=>window.print());
+
+  // Inicio
+  render('all');
+})();
+
 
