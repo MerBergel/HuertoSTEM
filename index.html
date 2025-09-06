@@ -1,848 +1,455 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sembrando Futuro | Proyecto Huerto STEAM 2025–2026</title>
 
-  <!-- Tailwind + Chart.js + Fuentes -->
+  <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- QRCode.js para generar QR en cliente -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+  <!-- Chart.js (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!-- Estilos propios -->
-  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="styles.css">
 </head>
-<body class="text-stone-800">
-<div class="min-h-screen flex flex-col">
-  <!-- Header -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <span class="text-2xl font-black text-green-700">Sembrando Futuro</span>
-        </div>
-        <nav class="hidden md:flex space-x-6">
-          <a href="#proyecto"      data-target="proyecto"      class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">El Proyecto</a>
-          <a href="#cronograma"    data-target="cronograma"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Cronograma</a>
-          <a href="#planificacion" data-target="planificacion" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Planificación</a>
-          <a href="#areas"         data-target="areas"         class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Áreas STEAM</a>
-          <a href="#evaluacion"    data-target="evaluacion"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Evaluación</a>
-          <a href="#infografia"    data-target="infografia"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Infografía</a>
-          <a href="#recursos"      data-target="recursos"      class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Recursos</a>
-          <a href="#puntuaciones" data-target="puntuaciones" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Puntuaciones</a>
+<body class="text-stone-800 bg-[#fdfaf6]" style="font-family: 'Inter', sans-serif;">
 
-        </nav>
-      </div>
-    </div>
-  </header>
-
-  <!-- Main -->
-  <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-    <!-- PROYECTO -->
-    <section id="proyecto" class="content-section">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-stone-900 sm:text-5xl md:text-6xl">Un Vistazo al Proyecto</h1>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
-          "Sembrando Futuro" integra Ciencia, Tecnología, Ingeniería, Arte y Matemáticas a través de un huerto escolar.
-        </p>
-        <p class="mt-2 text-sm text-stone-500">Curso 2025–2026 · IES en Móstoles (Comunidad de Madrid)</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-lg font-bold text-green-800 mb-2">Justificación</h3>
-          <p class="text-stone-600">Entorno manipulativo, inclusivo y motivador, conectando currículo y sostenibilidad.</p>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-lg font-bold text-green-800 mb-2">Objetivos Generales</h3>
-          <ul class="list-disc list-inside text-stone-600 space-y-1">
-            <li>Integrar las disciplinas STEAM.</li>
-            <li>Fomentar el aprendizaje activo y cooperativo.</li>
-            <li>Desarrollar la competencia digital.</li>
-            <li>Impulsar la conciencia medioambiental y el servicio.</li>
-          </ul>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm">
-          <h3 class="text-lg font-bold text-green-800 mb-2">Metodologías Activas</h3>
-          <ul class="list-disc list-inside text-stone-600 space-y-1">
-            <li>ABP</li>
-            <li>Aprendizaje cooperativo</li>
-            <li>Gamificación</li>
-            <li>Aprendizaje-Servicio</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CRONOGRAMA -->
-    <section id="cronograma" class="content-section">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-stone-900">Cronograma Interactivo</h1>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Selecciona un trimestre para explorar las actividades (curso 2025–2026).</p>
-      </div>
-      <div class="flex justify-center space-x-4 mb-8">
-        <button data-trimestre="1" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">1º Trimestre</button>
-        <button data-trimestre="2" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">2º Trimestre</button>
-        <button data-trimestre="3" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all">3º Trimestre</button>
-      </div>
-      <div id="timeline-content" class="bg-white p-8 rounded-lg shadow-lg"></div>
-      <div class="text-center mt-6">
-        <a href="#planificacion" data-target="planificacion" class="inline-block nav-link font-bold text-green-700">Ver detalle mensual ↓</a>
-      </div>
-    </section>
-
-    <!-- PLANIFICACIÓN -->
-    <section id="planificacion" class="content-section">
-      <div class="text-center mb-8">
-        <h1 class="text-4xl font-extrabold text-stone-900">Planificación Mensual Detallada</h1>
-        <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">Desglose por trimestres → meses → semanas (9 sesiones/semana).</p>
-        <div class="mt-4 flex items-center justify-center gap-3">
-          <button id="expandAll" class="px-4 py-2 rounded-md bg-stone-900 text-white text-sm">Expandir todo</button>
-          <button id="collapseAll" class="px-4 py-2 rounded-md bg-stone-200 text-stone-800 text-sm">Contraer todo</button>
-          <button id="printPlan" class="px-4 py-2 rounded-md bg-green-700 text-white text-sm">Imprimir / PDF</button>
-        </div>
-      </div>
-
-      <!-- T1 -->
-      <div class="bg-white rounded-xl shadow-lg mb-6">
-        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
-                aria-expanded="false" data-target="t1">
-          <span>Trimestre 1 · Diseño y Planificación (sept–dic)</span>
-          <span class="chev transition-transform">▾</span>
-        </button>
-        <div id="t1" class="hidden p-6 space-y-6">
-          <!-- Septiembre -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Septiembre · ¡Arrancamos! (≈3,5 semanas · ~32 sesiones) · Objetivo: bases del proyecto y U1</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 1 (aprox. 8–12 sept) · ~7 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Lanzamiento del reto, roles, cohesión.</li>
-                  <li><b>U1 (3):</b> Método científico aplicado al huerto.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 2 (aprox. 15–19 sept) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Operación Terreno: medidas, luz, viento, puntos de agua. Arranque del Cuaderno de Campo digital.</li>
-                  <li><b>U1-Mat (4):</b> Áreas (m²), fracciones, potencias, radicales.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 3 (aprox. 22–26 sept) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Misión Suelo: recogida de muestras. Creación del blog y primera entrada.</li>
-                  <li><b>U1-FyQ (4):</b> Estados de la materia conectados al huerto.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 4 (29 sept–3 oct) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Laboratorio de Suelo (textura, pH) y registro.</li>
-                  <li><b>U2-FyQ (5):</b> Mezclas y disoluciones (nutrientes).</li>
-                </ul>
-              </div>
-            </div>
+  <div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+            <span class="text-2xl font-black text-green-700">Sembrando Futuro</span>
           </div>
-
-          <!-- Octubre -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Octubre · Fase de diseño (≈4 semanas · ~34 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 5 (6–10 oct) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Planos a escala + investigación botánica (5–7 cultivos).</li>
-                  <li><b>U2-Mat (4):</b> Proporcionalidad aplicada a planos.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 6 (13–17 oct) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Cálculo de superficies/volúmenes; bocetos y estética.</li>
-                  <li><b>U2-Bio & U1-Tec (5):</b> Sol y estaciones; máquinas y mecanismos.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 7 (20–24 oct) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Maquetas 3D con materiales reciclados.</li>
-                  <li><b>U2/U1 refuerzo (4):</b> Consolidación y dudas.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 8 (27–31 oct) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Fotos y documentación de maquetas.</li>
-                  <li><b>U2-Tec (4):</b> Electricidad y electrónica (base para Arduino).</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Noviembre–Diciembre -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Noviembre–Diciembre · Tecnología y presentación (≈6 semanas · ~44 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semanas 9–10 (3–14 nov) · ~16 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (8):</b> “Hola, Arduino”: LED, sensor temp., lectura básica.</li>
-                  <li><b>U2–U3 Tec (8):</b> Circuito, voltaje, resistencia, seguridad.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 11 (17–21 nov) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Ideas tecnológicas + guion de presentación.</li>
-                  <li><b>U3-FyQ (5):</b> Átomo y tabla periódica; N-P-K en nutrición vegetal.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semanas 12–13 (24 nov–5 dic) · ~16 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (8):</b> Ensayo de presentaciones; soporte visual.</li>
-                  <li><b>U2–U3 (8):</b> Cierre y repaso.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 14 (9–12 dic) · 7 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (7):</b> Defensa de proyectos, votación, artículo en el blog.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 15 (15–19 dic) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (2):</b> Auto/coevaluación del trimestre.</li>
-                  <li><b>Uds. (7):</b> Repaso y evaluación trimestral.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <nav class="hidden md:flex space-x-6">
+            <a href="#proyecto"    data-target="proyecto"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">El Proyecto</a>
+            <a href="#cronograma"  data-target="cronograma"  class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Cronograma</a>
+            <a href="#areas"       data-target="areas"       class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Áreas STEAM</a>
+            <a href="#evaluacion"  data-target="evaluacion"  class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Evaluación</a>
+            <a href="#infografia"  data-target="infografia"  class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Infografía</a>
+            <a href="#puntuaciones" data-target="puntuaciones" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Puntuaciones</a>
+            <a href="#recursos"    data-target="recursos"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Recursos</a>
+          </nav>
         </div>
       </div>
+    </header>
 
-      <!-- T2 -->
-      <div class="bg-white rounded-xl shadow-lg mb-6">
-        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
-                aria-expanded="false" data-target="t2">
-          <span>Trimestre 2 · Construcción y Desarrollo (ene–mar)</span>
-          <span class="chev transition-transform">▾</span>
-        </button>
-        <div id="t2" class="hidden p-6 space-y-6">
-          <!-- Enero -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Enero · Manos a la tierra (≈4 semanas · ~33 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 16 (7–9 ene) · ~5 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (3):</b> Plan de obra y materiales; entrada en el blog.</li>
-                  <li><b>U3-ByG (2):</b> Capas de la Tierra ↔ capas del bancal.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 17 (12–16 ene) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Preparación del terreno y construcción de bancales.</li>
-                  <li><b>U4-Mat (4):</b> Expresiones y polinomios para materiales/volúmenes.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 18 (19–23 ene) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Semilleros y mezcla de sustrato.</li>
-                  <li><b>U4-FyQ (4):</b> Formulación inorgánica (nitratos, fosfatos…).</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 19 (26–30 ene) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Finalizar y ubicar bancales según plano.</li>
-                  <li><b>U4-Tec (5):</b> Instalación eléctrica básica/electrónica.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Febrero -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Febrero · Siembra y tecnología (≈4 semanas · ~36 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 20 (2–6 feb) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Siembra directa + Riego v1 (bomba, tubos, goteros).</li>
-                  <li><b>U5-FyQ (4):</b> Cambios químicos; fotosíntesis.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 21 (9–13 feb) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Riego v2 con Arduino (relé + sensor humedad) y primeras pruebas de código.</li>
-                  <li><b>U5-Mat (4):</b> Ecuaciones/inecuaciones con consumos de agua.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 22 (16–20 feb) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Plantillas de datos (temp./humedad/altura). App de registro – MIT App Inventor (parte 1).</li>
-                  <li><b>U5-Bio (5):</b> Origen de la vida y ciclo de las plantas.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 23 (23–27 feb) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Trasplantes y actualización del blog con avances.</li>
-                  <li><b>U5-Tec (4):</b> Web y redes: buenas prácticas y publicación.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Marzo -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Marzo · Crecimiento y datos (≈4 semanas · ~29 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semanas 24–25 (2–13 mar) · ~18 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (8):</b> Ajuste del riego automático y primeras gráficas; etiquetado bilingüe.</li>
-                  <li><b>Uds. (10):</b> Cierre de la 5 y repaso del trimestre.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semanas 26–27 (16–27 mar) · ~11 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Mantenimiento, observación, reflexión y autoevaluación.</li>
-                  <li><b>Uds. (7):</b> Repaso y evaluación trimestral.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- T3 -->
-      <div class="bg-white rounded-xl shadow-lg">
-        <button class="w-full accordion-btn flex items-center justify-between px-6 py-4 font-bold text-left text-green-800 border-b"
-                aria-expanded="false" data-target="t3">
-          <span>Trimestre 3 · Crecimiento y Cosecha (abr–jun)</span>
-          <span class="chev transition-transform">▾</span>
-        </button>
-        <div id="t3" class="hidden p-6 space-y-6">
-          <!-- Abril -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Abril · Crecimiento y análisis (≈3,5 semanas · ~29 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 28 (7–11 abr) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Mantenimiento post-vacaciones; Estadística I (media, mediana, moda).</li>
-                  <li><b>U9-Mat (4):</b> Estadística y probabilidad con datos reales.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 29 (21–25 abr) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Control de plagas ecológico; visualización avanzada.</li>
-                  <li><b>U6-Bio (4):</b> Célula, mitosis, fotosíntesis/respiración.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 30 (28–30 abr) · ~5 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (3):</b> Planificación del Mercadillo (parte 1).</li>
-                  <li><b>U6-FyQ (2):</b> Reacciones en compost y fotosíntesis.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mayo -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Mayo · Cosecha y organización (≈4 semanas · ~34 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semanas 31–32 (5–16 may) · ~18 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (10):</b> Primeras cosechas; preparación de productos; cartelería y RRSS.</li>
-                  <li><b>U7-Bio & U8-Tec (8):</b> Genes/variedades; repaso y optimización del código del riego.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semanas 33–34 (19–30 may) · ~18 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (9):</b> Logística del mercadillo; edición del vídeo-resumen; difusión.</li>
-                  <li><b>U9-Bio (9):</b> Mendel con ejemplos del huerto; repaso general.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Junio -->
-          <div class="rounded-lg border border-green-100">
-            <div class="px-4 py-3 bg-green-50 font-bold text-green-900">Junio · Evento final y cierre (≈3 semanas · ~27 sesiones)</div>
-            <div class="p-4 space-y-4 text-stone-700">
-              <div>
-                <h4 class="font-bold">Semana 35 (2–6 jun) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (6):</b> Semana del Mercadillo; contabilidad y donación.</li>
-                  <li><b>Uds. (3):</b> Repaso final.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 36 (9–13 jun) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (5):</b> Presentaciones finales, estreno del vídeo y post final.</li>
-                  <li><b>Uds. (4):</b> Evaluaciones finales.</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="font-bold">Semana 37 (16–20 jun) · 9 sesiones</h4>
-                <ul class="list-disc list-inside">
-                  <li><b>Proyecto (4):</b> Desmontaje y limpieza; celebración e insignias.</li>
-                  <li><b>Uds. (5):</b> Recuperaciones y cierre.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ÁREAS STEAM -->
-    <section id="areas" class="content-section">
-      <div class="text-center mb-12">
-        <h1 class="class text-4xl font-extrabold text-stone-900">Explora las Áreas STEAM</h1>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Haz clic en un área para ver actividades asociadas.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-        <div data-area="cientifico"  class="steam-card p-6 bg-green-100  rounded-lg cursor-pointer hover:bg-green-200  transition-colors"><h3 class="text-xl font-bold text-green-800">Científico-Matemático</h3></div>
-        <div data-area="tecnologico" class="steam-card p-6 bg-blue-100   rounded-lg cursor-pointer hover:bg-blue-200   transition-colors"><h3 class="text-xl font-bold text-blue-800">Tecnológico</h3></div>
-        <div data-area="artistico"   class="steam-card p-6 bg-yellow-100 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors"><h3 class="text-xl font-bold text-yellow-800">Artístico y Social</h3></div>
-        <div data-area="linguistico" class="steam-card p-6 bg-red-100    rounded-lg cursor-pointer hover:bg-red-200    transition-colors"><h3 class="text-xl font-bold text-red-800">Lingüístico</h3></div>
-      </div>
-
-      <div id="steam-content" class="mt-8 bg-white p-8 rounded-lg shadow-lg min-h-[300px]"></div>
-
-      <div id="chart-area" class="hidden mt-8">
-        <h2 class="text-2xl font-bold text-center text-stone-800 mb-4">Ejemplo de Visualización de Datos</h2>
-        <p class="text-center text-stone-600 mb-4">Altura de plantas por semanas.</p>
-        <div class="chart-container"><canvas id="growthChartMain"></canvas></div>
-        <div class="text-center mt-4">
-          <button id="addDataBtn" class="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700">Añadir Dato Semanal</button>
-        </div>
-      </div>
-<!-- En index.html, dentro de Áreas STEAM, añade un botón -->
-<button id="loadCSV" class="px-4 py-2 bg-stone-900 text-white rounded-md">Cargar datos reales</button>
-
-    </section>
-
-    <!-- EVALUACIÓN -->
-    <section id="evaluacion" class="content-section">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-stone-900">¿Cómo Evaluamos?</h1>
-        <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Evaluación continua, formativa y sumativa.</p>
-      </div>
-      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold">R</div>
-          <div><h3 class="text-lg font-bold">Rúbricas</h3><p class="text-stone-600">Trabajo en equipo, orales, cuaderno de campo e hitos.</p></div>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold">P</div>
-          <div><h3 class="text-lg font-bold">Portfolio digital</h3><p class="text-stone-600">Cuaderno y blog como evidencias.</p></div>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold">O</div>
-          <div><h3 class="text-lg font-bold">Observación</h3><p class="text-stone-600">Registro del trabajo diario.</p></div>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
-          <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold">A</div>
-          <div><h3 class="text-lg font-bold">Auto/coevaluación</h3><p class="text-stone-600">Equipos valoran su desempeño.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- INFOGRAFÍA -->
-    <section id="infografia" class="content-section">
-      <div class="text-center my-12">
-        <h1 class="text-4xl md:text-6xl font-black text-[#073B4C] tracking-tight">Proyecto Huerto STEAM</h1>
-        <p class="text-2xl md:text-4xl font-bold text-[#118AB2] mt-2">"Sembrando Futuro"</p>
-        <p class="mt-2 text-sm text-slate-600">Curso 2025–2026</p>
-      </div>
-
-      <!-- Key stats -->
-      <section class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center my-12">
-        <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#FF6B6B]">1</p><p class="font-bold text-slate-600">Año de Proyecto</p></div>
-        <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#FFD166]">4º</p><p class="font-bold text-slate-600">de Diversificación</p></div>
-        <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#06D6A0]">5</p><p class="font-bold text-slate-600">Disciplinas STEAM</p></div>
-        <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#118AB2]">1</p><p class="font-bold text-slate-600">Comunidad</p></div>
-      </section>
-<!-- Section: Puntuaciones (Informativa) -->
-<section id="puntuaciones" class="content-section">
-  <div class="text-center mb-8">
-    <h1 class="text-4xl font-extrabold text-stone-900">Gamificación del Proyecto</h1>
-    <p class="mt-3 max-w-3xl mx-auto text-lg text-stone-600">
-      Así funcionará el sistema de puntos, las insignias y los niveles durante el curso 2025–2026.
-      Sirve para motivar y reconocer logros de los equipos de alumnos y alumnas.
-    </p>
-  </div>
-
-  <!-- ¿Cómo funciona? -->
-  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-    <h2 class="text-2xl font-bold text-stone-900 mb-4">¿Cómo funciona?</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold text-stone-900">Puntuación por categorías</h3>
-        <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
-          <li>🧪 <b>Ciencia</b>: prácticas de suelo, mediciones, análisis de datos (0–3 pts por hito).</li>
-          <li>⚙️ <b>Tecnología</b>: prototipos Arduino, riego, app de datos (0–3 pts por hito).</li>
-          <li>🎨 <b>Arte/Social</b>: diseño del espacio, cartelera, acciones solidarias (0–3 pts por hito).</li>
-          <li>🗣️ <b>Lingüístico</b>: cuaderno de campo, blog, presentaciones (0–3 pts por hito).</li>
-          <li>🤝 <b>Servicio</b>: apoyo a otros equipos, mercadillo, difusión (0–2 pts por acción).</li>
-        </ul>
-        <p class="mt-2 text-sm text-stone-500">Los puntos se conceden por evidencias objetivas (fotos, registros, entregables, demostraciones).</p>
-      </div>
-
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold text-stone-900">Dinámica</h3>
-        <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
-          <li><b>Roles rotativos</b> en cada equipo (coordinación, materiales, datos, comunicación).</li>
-          <li><b>Retos quincenales</b> (mini-desafíos focalizados con 1–3 pts).</li>
-          <li><b>Misiones extra</b> (p. ej. tutorial de riego o guía de pH) con bonus de 1–2 pts.</li>
-          <li><b>Fair play</b>: +1 pt por apoyo a otro equipo cuando lo evidencien ambos equipos.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <!-- Insignias -->
-  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-    <h2 class="text-2xl font-bold text-stone-900 mb-4">Insignias que podrán conseguir</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">🌱 Maestr@s del pH</h3>
-        <p class="text-stone-700">Conseguir ≥ 10 puntos en Ciencia.</p>
-      </div>
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">💧 Makers del Riego</h3>
-        <p class="text-stone-700">Conseguir ≥ 10 puntos en Tecnología.</p>
-      </div>
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">🎭 Diseño con Alma</h3>
-        <p class="text-stone-700">Conseguir ≥ 10 puntos en Arte/Social.</p>
-      </div>
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">✍️ Crónicas del Huerto</h3>
-        <p class="text-stone-700">Conseguir ≥ 10 puntos en Lingüístico.</p>
-      </div>
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">👐 Manos que Ayudan</h3>
-        <p class="text-stone-700">Conseguir ≥ 8 puntos en Servicio.</p>
-      </div>
-      <div class="border rounded-lg p-4">
-        <h3 class="font-bold">⭐ Equipo Estrella</h3>
-        <p class="text-stone-700">Total ≥ 50 puntos.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Niveles -->
-  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
-    <h2 class="text-2xl font-bold text-stone-900 mb-4">Niveles de equipo</h2>
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-stone-700">
-      <li class="border rounded-lg p-3"><b>Bronce</b>: 0–19 pts</li>
-      <li class="border rounded-lg p-3"><b>Plata</b>: 20–34 pts</li>
-      <li class="border rounded-lg p-3"><b>Oro</b>: 35–49 pts</li>
-      <li class="border rounded-lg p-3"><b>Platino</b>: 50–64 pts</li>
-      <li class="border rounded-lg p-3"><b>Diamante</b>: 65+ pts</li>
-      <li class="border rounded-lg p-3"><b>Mención del jurado</b>: hito excepcional documentado</li>
-    </ul>
-    <p class="mt-2 text-sm text-stone-500">Los niveles se actualizan al cierre de cada reto quincenal.</p>
-  </div>
-
-  <!-- Ejemplos y normas -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-    <div class="bg-white rounded-xl shadow-lg p-6">
-      <h2 class="text-xl font-bold text-stone-900 mb-3">Ejemplos de retos con evidencias</h2>
-      <ul class="list-disc list-inside text-stone-700 space-y-1">
-        <li>Diseñar y validar un <b>protocolo de medida</b> de altura semanal con foto-registro (🧪 2–3 pts).</li>
-        <li>Montar el <b>riego automático</b> y publicar esquema/código (⚙️ 2–3 pts).</li>
-        <li>Crear <b>señalética</b> bilingüe con QR y estilo del proyecto (🎨 1–3 pts).</li>
-        <li>Subir dos <b>entradas de blog</b> con resultados y reflexiones (🗣️ 1–3 pts).</li>
-        <li>Apoyar a otro equipo durante una sesión crítica y documentarlo (🤝 +1 pt a ambos).</li>
-      </ul>
-    </div>
-
-    <div class="bg-white rounded-xl shadow-lg p-6">
-      <h2 class="text-xl font-bold text-stone-900 mb-3">Normas y transparencia</h2>
-      <ul class="list-disc list-inside text-stone-700 space-y-1">
-        <li>Las puntuaciones las asignan las profesoras y profesores a partir de evidencias verificables.</li>
-        <li>Se prioriza la mejora continua y el trabajo cooperativo.</li>
-        <li>No se publican datos personales; se utilizan <b>nombres de equipo</b>.</li>
-        <li>Las insignias se otorgan en las <b>revisiones quincenales</b>.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Clasificación de ejemplo (mock) -->
-  <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
-    <h2 class="text-xl font-bold text-stone-900 mb-3">Clasificación de ejemplo</h2>
-    <div class="overflow-x-auto">
-      <table class="min-w-full">
-        <thead class="bg-stone-50 text-stone-600">
-          <tr>
-            <th class="p-3 text-left">Equipo</th>
-            <th class="p-3 text-left">🧪</th>
-            <th class="p-3 text-left">⚙️</th>
-            <th class="p-3 text-left">🎨</th>
-            <th class="p-3 text-left">🗣️</th>
-            <th class="p-3 text-left">🤝</th>
-            <th class="p-3 text-left">Total</th>
-            <th class="p-3 text-left">Insignias</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-stone-100">
-          <tr>
-            <td class="p-3 font-bold">Equipo A</td>
-            <td class="p-3">6</td><td class="p-3">7</td><td class="p-3">4</td><td class="p-3">5</td><td class="p-3">2</td>
-            <td class="p-3 font-extrabold">24</td>
-            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">🌱 Maestr@s del pH</span></td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold">Equipo B</td>
-            <td class="p-3">5</td><td class="p-3">9</td><td class="p-3">3</td><td class="p-3">4</td><td class="p-3">1</td>
-            <td class="p-3 font-extrabold">22</td>
-            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">💧 Makers del Riego</span></td>
-          </tr>
-          <tr>
-            <td class="p-3 font-bold">Equipo C</td>
-            <td class="p-3">4</td><td class="p-3">4</td><td class="p-3">5</td><td class="p-3">6</td><td class="p-3">2</td>
-            <td class="p-3 font-extrabold">21</td>
-            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">✍️ Crónicas del Huerto</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="text-xs text-stone-500 mt-2">Ejemplo meramente ilustrativo; las puntuaciones reales se asignarán durante el curso.</p>
-  </div>
-</section>
-
-      <!-- Justificación -->
-      <section class="my-12">
-        <div class="bg-white p-8 rounded-lg shadow-xl text-center">
-          <h2 class="text-3xl font-bold text-[#073B4C] mb-4">¿Por qué un Huerto STEAM?</h2>
-          <p class="text-lg text-slate-700 max-w-3xl mx-auto">
-            Entorno <b class="text-[#FF6B6B]">manipulativo</b>, <b class="text-[#06D6A0]">inclusivo</b> y <b class="text-[#FFD166]">motivador</b> que conecta currículo con sostenibilidad y trabajo en equipo.
+    <!-- Main -->
+    <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- PROYECTO -->
+      <section id="proyecto" class="content-section">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-extrabold text-stone-900 sm:text-5xl">Un Vistazo al Proyecto</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
+            "Sembrando Futuro" integra Ciencia, Tecnología, Ingeniería, Arte y Matemáticas a través de un huerto escolar.
           </p>
         </div>
-      </section>
 
-      <!-- Metodologías -->
-      <section class="my-12">
-        <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-8">Metodologías Activas</h2>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-          <div class="bg-[#118AB2] text-white p-4 rounded-lg shadow-md text-center"><p class="font-bold">ABP</p><p class="text-sm">Aprendizaje Basado en Proyectos</p></div>
-          <div class="text-2xl font-bold text-[#118AB2]">&#10140;</div>
-          <div class="bg-[#06D6A0] text-white p-4 rounded-lg shadow-md text-center"><p class="font-bold">Cooperativo</p><p class="text-sm">Roles rotativos</p></div>
-          <div class="text-2xl font-bold text-[#06D6A0]">&#10140;</div>
-          <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow-md text-center"><p class="font-bold">Gamificación</p><p class="text-sm">Retos e insignias</p></div>
-          <div class="text-2xl font-bold text-[#FFD166]">&#10140;</div>
-          <div class="bg-[#FF6B6B] text-white p-4 rounded-lg shadow-md text-center"><p class="font-bold">Servicio</p><p class="text-sm">Mercadillo solidario</p></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-lg font-bold text-green-800 mb-2">Justificación</h3>
+            <p class="text-stone-600">
+              Entorno de aprendizaje manipulativo, inclusivo y motivador que conecta currículo y naturaleza, y promueve sostenibilidad y responsabilidad.
+            </p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-lg font-bold text-green-800 mb-2">Objetivos Generales</h3>
+            <ul class="list-disc list-inside text-stone-600 space-y-1">
+              <li>Integrar las disciplinas STEAM.</li>
+              <li>Fomentar el aprendizaje activo.</li>
+              <li>Desarrollar la competencia digital.</li>
+              <li>Promover la conciencia medioambiental.</li>
+              <li>Conectar con la comunidad.</li>
+            </ul>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm">
+            <h3 class="text-lg font-bold text-green-800 mb-2">Metodologías Activas</h3>
+            <ul class="list-disc list-inside text-stone-600 space-y-1">
+              <li>Aprendizaje Basado en Proyectos (ABP)</li>
+              <li>Aprendizaje Cooperativo</li>
+              <li>Gamificación</li>
+              <li>Aprendizaje-Servicio</li>
+            </ul>
+          </div>
         </div>
       </section>
 
-      <!-- Timeline -->
-      <section class="my-16">
-        <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-12">Un Viaje a lo Largo del Curso</h2>
-        <div class="relative pl-8 border-l-4 border-sky-200">
-          <div class="relative mb-12 timeline-item">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <p class="font-bold text-sm text-[#118AB2]">SEPTIEMBRE - DICIEMBRE</p>
-              <h3 class="text-xl font-bold text-[#073B4C] mt-1">Diseño y Planificación</h3>
-              <p class="text-slate-600 mt-2">Análisis de suelo, planos a escala e imagen del proyecto.</p>
+      <!-- CRONOGRAMA (Trimestres) -->
+      <section id="cronograma" class="content-section">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-extrabold text-stone-900">Cronograma Interactivo</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
+            Selecciona un trimestre para ver las actividades del curso 2025–2026.
+          </p>
+        </div>
+        <div class="flex justify-center space-x-4 mb-8">
+          <button data-trimestre="1" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">1º Trimestre</button>
+          <button data-trimestre="2" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">2º Trimestre</button>
+          <button data-trimestre="3" class="timeline-btn px-6 py-3 font-bold rounded-lg shadow-md transition-all duration-300 transform hover:scale-105">3º Trimestre</button>
+        </div>
+        <div id="timeline-content" class="bg-white p-8 rounded-lg shadow-lg"></div>
+      </section>
+
+      <!-- ÁREAS STEAM -->
+      <section id="areas" class="content-section">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-extrabold text-stone-900">Explora las Áreas STEAM</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
+            Haz clic en un área para ver las actividades asociadas.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+          <div data-area="cientifico" class="steam-card p-6 bg-green-100 rounded-lg cursor-pointer hover:bg-green-200 transition-colors duration-300">
+            <h3 class="text-xl font-bold text-green-800">Científico-Matemático</h3>
+          </div>
+          <div data-area="tecnologico" class="steam-card p-6 bg-blue-100 rounded-lg cursor-pointer hover:bg-blue-200 transition-colors duration-300">
+            <h3 class="text-xl font-bold text-blue-800">Tecnológico</h3>
+          </div>
+          <div data-area="artistico" class="steam-card p-6 bg-yellow-100 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors duration-300">
+            <h3 class="text-xl font-bold text-yellow-800">Artístico y Social</h3>
+          </div>
+          <div data-area="linguistico" class="steam-card p-6 bg-red-100 rounded-lg cursor-pointer hover:bg-red-200 transition-colors duration-300">
+            <h3 class="text-xl font-bold text-red-800">Lingüístico</h3>
+          </div>
+        </div>
+
+        <div id="steam-content" class="mt-8 bg-white p-8 rounded-lg shadow-lg min-h-[300px]"></div>
+
+        <div id="chart-area" class="hidden mt-8">
+          <h2 class="text-2xl font-bold text-center text-stone-800 mb-4">Ejemplo de Visualización de Datos</h2>
+          <p class="text-center text-stone-600 mb-4">Gráfico de alturas (ejemplo) de dos cultivos a lo largo del tiempo.</p>
+          <div class="chart-container">
+            <canvas id="growthChartMain"></canvas>
+          </div>
+          <div class="text-center mt-4">
+            <button id="addDataBtnMain" class="px-5 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors">Añadir Dato Semanal</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- EVALUACIÓN -->
+      <section id="evaluacion" class="content-section">
+        <div class="text-center mb-12">
+          <h1 class="text-4xl font-extrabold text-stone-900">¿Cómo Evaluamos?</h1>
+          <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">
+            Evaluación continua, formativa y sumativa a lo largo de todo el proyecto.
+          </p>
+        </div>
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg">R</div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-800">Rúbricas de evaluación</h3>
+              <p class="text-stone-600">Trabajo en equipo, presentaciones orales, cuaderno de campo e hitos clave.</p>
             </div>
           </div>
-          <div class="relative mb-12 timeline-item">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <p class="font-bold text-sm text-[#118AB2]">ENERO - MARZO</p>
-              <h3 class="text-xl font-bold text-[#073B4C] mt-1">Construcción y Desarrollo</h3>
-              <p class="text-slate-600 mt-2">Bancales, siembras y riego automatizado con Arduino.</p>
+          <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center font-bold text-lg">P</div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-800">Portfolio digital</h3>
+              <p class="text-stone-600">Cuaderno de campo y blog como evidencias del proceso.</p>
             </div>
           </div>
-          <div class="relative timeline-item">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-              <p class="font-bold text-sm text-[#118AB2]">ABRIL - JUNIO</p>
-              <h3 class="text-xl font-bold text-[#073B4C] mt-1">Crecimiento y Cosecha</h3>
-              <p class="text-slate-600 mt-2">Análisis de datos, cosecha y mercadillo solidario.</p>
+          <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold text-lg">O</div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-800">Observación directa</h3>
+              <p class="text-stone-600">Registro del trabajo diario en el huerto y el aula.</p>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-sm flex items-start space-x-4">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">A</div>
+            <div>
+              <h3 class="text-lg font-bold text-stone-800">Autoevaluación y coevaluación</h3>
+              <p class="text-stone-600">Los equipos valoran su propio desempeño y el de sus compañeras y compañeros.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 4 claves + donut -->
-      <section class="my-16">
-        <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Las 4 Claves del Proyecto</h2>
-        <p class="text-center text-slate-700 max-w-2xl mx-auto mb-8">Integración equilibrada de las áreas.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-[#FF6B6B]">Científico-Matemático</h3><p class="mt-2 text-slate-600">pH, volúmenes y estadística del crecimiento.</p></div>
-          <div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-[#06D6A0]">Tecnológico</h3><p class="mt-2 text-slate-600">Riego con Arduino y app de datos.</p></div>
-          <div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-[#FFD166]">Artístico y Social</h3><p class="mt-2 text-slate-600">Diseño del espacio y mercadillo solidario.</p></div>
-          <div class="bg-white p-6 rounded-lg shadow-lg"><h3 class="text-xl font-bold text-[#118AB2]">Lingüístico</h3><p class="mt-2 text-slate-600">Cuaderno de campo, etiquetas y presentaciones.</p></div>
-          <div class="bg-white p-6 rounded-lg shadow-lg md:col-span-2">
-            <h3 class="text-xl font-bold text-center text-[#073B4C] mb-4">Un Enfoque Integrado</h3>
-            <div class="chart-container"><canvas id="disciplinesChartInf"></canvas></div>
-            <p class="text-center text-slate-600 mt-4 text-sm">Cada área aporta una parte esencial.</p>
+      <!-- INFOGRAFÍA -->
+      <section id="infografia" class="content-section">
+        <div class="text-center my-8">
+          <h1 class="text-4xl md:text-5xl font-black text-[#073B4C] tracking-tight">Proyecto Huerto STEAM</h1>
+          <p class="text-2xl font-bold text-[#118AB2] mt-2">"Sembrando Futuro"</p>
+        </div>
+
+        <!-- Key Stats -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center my-12">
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <p class="text-4xl font-extrabold text-[#FF6B6B]">1</p>
+            <p class="font-bold text-slate-600">Año de Proyecto</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <p class="text-4xl font-extrabold text-[#FFD166]">4º</p>
+            <p class="font-bold text-slate-600">de Diversificación</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <p class="text-4xl font-extrabold text-[#06D6A0]">5</p>
+            <p class="font-bold text-slate-600">Disciplinas STEAM</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <p class="text-4xl font-extrabold text-[#118AB2]">1</p>
+            <p class="font-bold text-slate-600">Comunidad</p>
+          </div>
+        </section>
+
+        <!-- Metodologías -->
+        <section class="my-12">
+          <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-6">Nuestras Metodologías Activas</h2>
+          <div class="flex flex-col md:flex-row justify-center items-center gap-4">
+            <div class="bg-[#118AB2] text-white p-4 rounded-lg shadow-md text-center">
+              <p class="font-bold">ABP</p>
+              <p class="text-sm">Aprendizaje Basado en Proyectos</p>
+            </div>
+            <div class="text-2xl font-bold text-[#118AB2]">&#10140;</div>
+            <div class="bg-[#06D6A0] text-white p-4 rounded-lg shadow-md text-center">
+              <p class="font-bold">Cooperativo</p>
+              <p class="text-sm">Roles rotativos</p>
+            </div>
+            <div class="text-2xl font-bold text-[#06D6A0]">&#10140;</div>
+            <div class="bg-[#FFD166] text-[#073B4C] p-4 rounded-lg shadow-md text-center">
+              <p class="font-bold">Gamificación</p>
+              <p class="text-sm">Puntos, retos e insignias</p>
+            </div>
+            <div class="text-2xl font-bold text-[#FFD166]">&#10140;</div>
+            <div class="bg-[#FF6B6B] text-white p-4 rounded-lg shadow-md text-center">
+              <p class="font-bold">Servicio</p>
+              <p class="text-sm">Mercadillo solidario</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Timeline vertical resumen -->
+        <section class="my-16">
+          <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-10">Un Viaje a lo Largo del Curso</h2>
+          <div class="relative pl-8 border-l-4 border-sky-200 space-y-8">
+            <div class="relative">
+              <span class="absolute -left-3 top-2 w-4 h-4 rounded-full bg-[#118AB2] border-4 border-sky-50"></span>
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <p class="font-bold text-sm text-[#118AB2]">SEPTIEMBRE – DICIEMBRE</p>
+                <h3 class="text-xl font-bold text-[#073B4C] mt-1">Diseño y Planificación</h3>
+                <p class="text-slate-600 mt-2">Análisis del suelo, planos a escala, investigación de plantas y branding del proyecto.</p>
+              </div>
+            </div>
+            <div class="relative">
+              <span class="absolute -left-3 top-2 w-4 h-4 rounded-full bg-[#118AB2] border-4 border-sky-50"></span>
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <p class="font-bold text-sm text-[#118AB2]">ENERO – MARZO</p>
+                <h3 class="text-xl font-bold text-[#073B4C] mt-1">Construcción y Desarrollo</h3>
+                <p class="text-slate-600 mt-2">Preparación del terreno, siembra y sistema de riego automatizado con Arduino.</p>
+              </div>
+            </div>
+            <div class="relative">
+              <span class="absolute -left-3 top-2 w-4 h-4 rounded-full bg-[#118AB2] border-4 border-sky-50"></span>
+              <div class="bg-white p-6 rounded-lg shadow-lg">
+                <p class="font-bold text-sm text-[#118AB2]">ABRIL – JUNIO</p>
+                <h3 class="text-xl font-bold text-[#073B4C] mt-1">Crecimiento y Cosecha</h3>
+                <p class="text-slate-600 mt-2">Registro de datos, análisis, cosecha y mercadillo solidario.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- STEAM donut + growth -->
+        <section class="my-16">
+          <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-6">Las 4 Claves del Proyecto</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold text-[#FF6B6B]">Científico-Matemático</h3>
+              <p class="mt-2 text-slate-600">pH del suelo, volumen de tierra y estadística de crecimiento.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold text-[#06D6A0]">Tecnológico</h3>
+              <p class="mt-2 text-slate-600">Arduino, sensores y app de registro de datos.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold text-[#FFD166]">Artístico y Social</h3>
+              <p class="mt-2 text-slate-600">Diseño del espacio y mercadillo solidario.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+              <h3 class="text-xl font-bold text-[#118AB2]">Lingüístico</h3>
+              <p class="mt-2 text-slate-600">Cuaderno de campo digital, etiquetas bilingües y presentaciones.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-lg md:col-span-2">
+              <h3 class="text-xl font-bold text-center text-[#073B4C] mb-4">Un Enfoque Integrado</h3>
+              <div class="chart-container">
+                <canvas id="disciplinesChart"></canvas>
+              </div>
+              <p class="text-center text-slate-600 mt-4 text-sm">Cada área aporta una parte igual y fundamental.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="my-16">
+          <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-6">De la Tierra a los Datos</h2>
+          <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="chart-container">
+              <canvas id="growthChartInfo"></canvas>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- PUNTUACIONES (INFORMATIVA) -->
+      <section id="puntuaciones" class="content-section">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-extrabold text-stone-900">Gamificación del Proyecto</h1>
+          <p class="mt-3 max-w-3xl mx-auto text-lg text-stone-600">
+            Así funcionará el sistema de puntos, las insignias y los niveles durante el curso 2025–2026.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h2 class="text-2xl font-bold text-stone-900 mb-4">¿Cómo funciona?</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="border rounded-lg p-4">
+              <h3 class="font-bold text-stone-900">Puntuación por categorías</h3>
+              <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
+                <li>🧪 <b>Ciencia</b>: suelo, mediciones, datos (0–3 pts por hito).</li>
+                <li>⚙️ <b>Tecnología</b>: Arduino, riego, app (0–3 pts por hito).</li>
+                <li>🎨 <b>Arte/Social</b>: diseño y acciones (0–3 pts por hito).</li>
+                <li>🗣️ <b>Lingüístico</b>: cuaderno, blog, presentaciones (0–3 pts).</li>
+                <li>🤝 <b>Servicio</b>: apoyo y mercadillo (0–2 pts por acción).</li>
+              </ul>
+              <p class="mt-2 text-sm text-stone-500">Se puntúa con evidencias: fotos, registros, entregables, demostraciones.</p>
+            </div>
+            <div class="border rounded-lg p-4">
+              <h3 class="font-bold text-stone-900">Dinámica</h3>
+              <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
+                <li><b>Roles rotativos</b> por equipo (coordinación, materiales, datos, comunicación).</li>
+                <li><b>Retos quincenales</b> con objetivos claros.</li>
+                <li><b>Misiones extra</b> (tutorial de riego, guía de pH) con bonus.</li>
+                <li><b>Fair play</b>: +1 pt por apoyo documentado a otra equipo.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h2 class="text-2xl font-bold text-stone-900 mb-4">Insignias</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="border rounded-lg p-4"><h3 class="font-bold">🌱 Maestr@s del pH</h3><p>≥ 10 pts en Ciencia.</p></div>
+            <div class="border rounded-lg p-4"><h3 class="font-bold">💧 Makers del Riego</h3><p>≥ 10 pts en Tecnología.</p></div>
+            <div class="border rounded-lg p-4"><h3 class="font-bold">🎭 Diseño con Alma</h3><p>≥ 10 pts en Arte/Social.</p></div>
+            <div class="border rounded-lg p-4"><h3 class="font-bold">✍️ Crónicas del Huerto</h3><p>≥ 10 pts en Lingüístico.</p></div>
+            <div class="border rounded-lg p-4"><h3 class="font-bold">👐 Manos que Ayudan</h3><p>≥ 8 pts en Servicio.</p></div>
+            <div class="border rounded-lg p-4"><h3 class="font-bold">⭐ Equipo Estrella</h3><p>Total ≥ 50 pts.</p></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h2 class="text-2xl font-bold text-stone-900 mb-4">Niveles de equipo</h2>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-stone-700">
+            <li class="border rounded-lg p-3"><b>Bronce</b>: 0–19 pts</li>
+            <li class="border rounded-lg p-3"><b>Plata</b>: 20–34 pts</li>
+            <li class="border rounded-lg p-3"><b>Oro</b>: 35–49 pts</li>
+            <li class="border rounded-lg p-3"><b>Platino</b>: 50–64 pts</li>
+            <li class="border rounded-lg p-3"><b>Diamante</b>: 65+ pts</li>
+            <li class="border rounded-lg p-3"><b>Mención del jurado</b>: hito excepcional documentado</li>
+          </ul>
+          <p class="mt-2 text-sm text-stone-500">Actualización al cierre de cada reto quincenal.</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <h2 class="text-xl font-bold text-stone-900 mb-3">Ejemplos y normas</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h3 class="font-bold">Ejemplos de retos</h3>
+              <ul class="list-disc list-inside text-stone-700 space-y-1">
+                <li>Protocolo de medida con foto-registro.</li>
+                <li>Riego automático con esquema y código.</li>
+                <li>Señalética bilingüe con QR e imagen del proyecto.</li>
+                <li>Entradas de blog con resultados y reflexiones.</li>
+                <li>Apoyo documentado a otra equipo (+1 pt a ambos).</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="font-bold">Normas y transparencia</h3>
+              <ul class="list-disc list-inside text-stone-700 space-y-1">
+                <li>Puntuaciones asignadas por profesoras y profesores con evidencias.</li>
+                <li>Se prioriza la mejora continua y el trabajo cooperativo.</li>
+                <li>Se usan nombres de equipo, no datos personales.</li>
+                <li>Revisión quincenal de insignias y niveles.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- Línea de crecimiento -->
-      <section class="my-16">
-        <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">De la Tierra a los Datos</h2>
-        <p class="text-center text-slate-700 max-w-2xl mx-auto mb-8">Ejemplo de visualización del crecimiento.</p>
-        <div class="bg-white p-6 rounded-lg shadow-xl">
-          <div class="chart-container"><canvas id="growthChartInf"></canvas></div>
+      <!-- RECURSOS -->
+      <section id="recursos" class="content-section">
+        <div class="text-center mb-8">
+          <h1 class="text-4xl font-extrabold text-stone-900">Recursos del Proyecto</h1>
+          <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">Materiales para familias y el cronograma de hitos del curso.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <!-- Cronograma de Hitos -->
+          <div class="bg-white p-6 rounded-xl shadow-lg md:col-span-3">
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div>
+                <h3 class="text-xl font-bold text-stone-900">Cronograma de Hitos 2025–2026</h3>
+                <p class="text-stone-600">Fechas clave del proyecto “Sembrando Futuro”.</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <button class="px-3 py-2 rounded-md bg-stone-200 text-stone-800 font-semibold hover:bg-stone-300" data-crono-filter="all">Todos</button>
+                <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="1">T1</button>
+                <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="2">T2</button>
+                <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="3">T3</button>
+                <button id="printTimeline" class="px-3 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Imprimir</button>
+              </div>
+            </div>
+            <div id="timelineList" class="relative pl-4 border-l-4 border-stone-200 space-y-5"></div>
+            <p class="text-xs text-stone-500 mt-4">
+              ¿Prefieres importar en tu calendario? 
+              <a href="assets/hitos_2025-2026.ics" class="underline" target="_blank" rel="noopener">Descargar .ics (opcional)</a>
+            </p>
+          </div>
+
+          <!-- Dossier Gamificación -->
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-stone-900 mb-2">Dossier de Gamificación (familias)</h3>
+            <p class="text-stone-600 mb-4">Cómo funcionan los puntos, niveles e insignias (curso 2025–2026).</p>
+            <a href="assets/gamificacion_familias_2025-2026.pdf" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black w-full" target="_blank" rel="noopener">Descargar PDF</a>
+          </div>
+
+          <!-- Póster Insignias -->
+          <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-xl font-bold text-stone-900 mb-2">Póster A4: Insignias del Proyecto</h3>
+            <p class="text-stone-600 mb-4">Cartel imprimible con las insignias y requisitos.</p>
+            <a href="assets/cartel_insignias_A4_2025-2026.pdf" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800 w-full" target="_blank" rel="noopener">Descargar PDF</a>
+          </div>
         </div>
       </section>
-    </section>
+    </main>
 
-    <!-- RECURSOS (descargas + QR) -->
-    <section id="recursos" class="content-section">
-      <div class="text-center mb-10">
-        <h1 class="text-4xl font-extrabold text-stone-900">Recursos del Proyecto</h1>
-        <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">Descargas listas y generador de etiquetas QR bilingües.</p>
+    <!-- Footer -->
+    <footer class="bg-stone-800 text-white mt-12">
+      <div class="container mx-auto px-6 py-6 text-center space-y-1">
+        <p class="font-bold">IES en Móstoles, Comunidad de Madrid</p>
+        <p class="text-sm text-stone-300">Curso 2025–2026</p>
+        <p class="text-xs text-stone-400">
+          Contenido bajo licencia <a class="underline" href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-SA 4.0</a>.
+        </p>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Rúbricas -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <h3 class="text-xl font-bold text-stone-900 mb-2">Rúbricas (PDF)</h3>
-          <p class="text-stone-600 mb-4">Trabajo en equipo, presentación oral, cuaderno de campo y prototipo Arduino.</p>
-          <!-- Sustituye href por la URL donde subas el PDF -->
-          <a id="dlRubricas" href="assets/rubricas_huerto_steam_2025-2026.pdf" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800 w-full">Descargar PDF</a>
-          <p class="text-xs text-stone-500 mt-2">Sube el archivo a <code>assets/</code> o cambia el enlace.</p>
-        </div>
-
-        <!-- Cuaderno de Campo -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <h3 class="text-xl font-bold text-stone-900 mb-2">Cuaderno de Campo</h3>
-          <p class="text-stone-600 mb-4">Plantilla para registrar datos del huerto.</p>
-          <div class="space-y-2">
-            <a id="dlExcel" href="assets/cuaderno_campo_2025-2026.xlsx" class="block text-center px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Descargar (.xlsx)</a>
-            <a id="dlCSV" href="assets/cuaderno_campo_2025-2026.csv" class="block text-center px-4 py-2 rounded-md bg-stone-200 text-stone-900 font-semibold hover:bg-stone-300">Descargar (.csv)</a>
-          </div>
-          <p class="text-xs text-stone-500 mt-2">También puedes subir el .xlsx a Drive y abrirlo con Google Sheets.</p>
-        </div>
-<!-- Cronograma de Hitos (sustituye la tarjeta del calendario ICS por esto) -->
-<div class="bg-white p-6 rounded-xl shadow-lg md:col-span-3">
-  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-    <div>
-      <h3 class="text-xl font-bold text-stone-900">Cronograma de Hitos 2025–2026</h3>
-      <p class="text-stone-600">Fechas clave del proyecto “Sembrando Futuro”.</p>
-    </div>
-    <div class="flex items-center gap-2">
-      <button class="px-3 py-2 rounded-md bg-stone-200 text-stone-800 font-semibold hover:bg-stone-300" data-crono-filter="all">Todos</button>
-      <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="1">T1</button>
-      <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="2">T2</button>
-      <button class="px-3 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800" data-crono-filter="3">T3</button>
-      <button id="printTimeline" class="px-3 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Imprimir</button>
-    </div>
+    </footer>
   </div>
 
-  <!-- Lista/timeline -->
-  <div id="timelineList" class="relative pl-4 border-l-4 border-stone-200 space-y-5"></div>
-
-  <!-- Enlace opcional al .ics por si familias lo quieren importar -->
-  <p class="text-xs text-stone-500 mt-4">
-    ¿Prefieres importar al calendario? 
-    <a href="assets/hitos_2025-2026.ics" class="underline" target="_blank" rel="noopener">Descargar .ics (opcional)</a>
-  </p>
-</div>
-
-
-        <!-- Etiquetas QR -->
-        <div class="bg-white p-6 rounded-xl shadow-lg">
-          <h3 class="text-xl font-bold text-stone-900 mb-2">Etiquetas QR bilingües</h3>
-          <p class="text-stone-600 mb-4">Genera etiquetas (ES/EN) con QR hacia tus páginas o fichas.</p>
-          <button id="openQR" class="w-full px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800">Abrir generador</button>
-          <p class="text-xs text-stone-500 mt-2">Imprime en A4 tras generar (botón “Imprimir”).</p>
-        </div>
-      </div>
-
-      <!-- Modal QR -->
-      <div id="qrModal" class="fixed inset-0 bg-black/50 hidden items-start md:items-center justify-center p-4 z-50">
-        <div class="bg-white w-full max-w-6xl rounded-xl shadow-2xl">
-          <div class="flex items-center justify-between px-6 py-4 border-b">
-            <h3 class="text-xl font-bold">Generador de Etiquetas QR (ES/EN)</h3>
-            <button id="closeQR" class="text-stone-500 hover:text-stone-800 text-2xl leading-none">&times;</button>
-          </div>
-          <div class="p-6 space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="md:col-span-2">
-                <label class="block text-sm font-semibold mb-1">Lista de plantas (una por línea · formato: <code>ES | EN | URL</code>)</label>
-                <textarea id="plantInput" rows="8" class="w-full border rounded-md p-3 text-sm" placeholder="Tomatera | Tomato | https://tu-centro.es/huerto/tomatera"></textarea>
-                <p class="text-xs text-stone-500 mt-1">Consejo: usa URLs internas del centro o del blog del proyecto.</p>
-              </div>
-              <div>
-                <label class="block text-sm font-semibold mb-1">Opciones</label>
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-sm">Tamaño QR (px)</span>
-                    <input id="qrSize" type="number" min="96" max="256" value="128" class="w-24 border rounded-md p-1 text-sm text-right">
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span class="text-sm">Columnas por página</span>
-                    <input id="qrCols" type="number" min="2" max="5" value="4" class="w-24 border rounded-md p-1 text-sm text-right">
-                  </div>
-                </div>
-                <div class="mt-4 space-x-2">
-                  <button id="genQR" class="px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800">Generar</button>
-                  <button id="printQR" class="px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Imprimir</button>
-                </div>
-              </div>
-            </div>
-
-            <div id="qrGrid" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 print:grid-cols-4"></div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-stone-800 text-white mt-12">
-    <div class="container mx-auto px-6 py-6 text-center">
-      <p class="font-bold">IES en Móstoles, Comunidad de Madrid</p>
-      <p class="text-sm text-stone-400">
-        Curso 2025–2026 ·
-        <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.es" rel="license noopener" target="_blank" class="underline hover:text-white">
-          Licencia CC BY-SA 4.0
-        </a>
-      </p>
-    </div>
-  </footer>
-</div>
-
-<!-- JS propio -->
-<script src="script.js" defer></script>
+  <!-- Lógica de la aplicación -->
+  <script src="script.js" defer></script>
 </body>
 </html>
-
 
 
 
