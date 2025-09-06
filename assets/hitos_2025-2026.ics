@@ -1,0 +1,104 @@
+BEGIN:VCALENDAR
+PRODID:-//Sembrando Futuro//Huerto STEAM 2025-2026//ES
+VERSION:2.0
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Huerto STEAM 2025-2026 (IES Móstoles)
+X-WR-TIMEZONE:Europe/Madrid
+
+BEGIN:VEVENT
+UID:518a7ece-67e6-4fb5-ac9d-a619483b007e
+SUMMARY:Inicio del proyecto "Sembrando Futuro"
+DTSTART;VALUE=DATE:20250908
+DTEND;VALUE=DATE:20250909
+DESCRIPTION:Apertura del proyecto y presentación del reto anual.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:4b62f9f0-cbc0-42d1-8e38-f190d43da08a
+SUMMARY:Bloque Hola Arduino (LED y sensor de temperatura)
+DTSTART;VALUE=DATE:20251103
+DTEND;VALUE=DATE:20251115
+DESCRIPTION:Dos semanas de introducción a Arduino: entradas, salidas y lecturas básicas.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:50a29c77-cc94-48ad-a685-046f94008645
+SUMMARY:Defensa de proyectos Trimestre 1 + Votación
+DTSTART;VALUE=DATE:20251209
+DTEND;VALUE=DATE:20251213
+DESCRIPTION:Presentación pública de diseños y votación del diseño a construir en T2.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:8e3c89b7-27b8-46ad-bdbe-7e22adebdc0e
+SUMMARY:Inicio de construcción (plan de obra y materiales)
+DTSTART;VALUE=DATE:20260107
+DTEND;VALUE=DATE:20260110
+DESCRIPTION:Puesta en marcha de bancales y organización de equipos y tareas.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:09182d5b-c562-4830-ae6c-572692215018
+SUMMARY:Siembra directa + Riego v1 (bomba/goteros)
+DTSTART;VALUE=DATE:20260203
+DTEND;VALUE=DATE:20260208
+DESCRIPTION:Primera siembra en bancales y prototipo inicial de riego.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:2c9381c1-60ed-4c44-8bf3-cf372b623ff3
+SUMMARY:Riego v2 con Arduino (relé + sensor de humedad)
+DTSTART;VALUE=DATE:20260209
+DTEND;VALUE=DATE:20260214
+DESCRIPTION:Integración de relé y sensor para automatizar el riego.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:056a994f-1753-4555-bbe1-b7ed045443d9
+SUMMARY:Trasplantes + actualización del blog
+DTSTART;VALUE=DATE:20260223
+DTEND;VALUE=DATE:20260228
+DESCRIPTION:Trasplante de plantones y comunicación de avances a la comunidad.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:355dd78a-4f16-46f1-ab9c-56805ab3e6a4
+SUMMARY:Ajuste de riego automático + primeras gráficas
+DTSTART;VALUE=DATE:20260302
+DTEND;VALUE=DATE:20260314
+DESCRIPTION:Calibración del sistema y visualización de datos en hojas de cálculo.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:8aab9ab7-e187-4234-bc51-f5abb8d6619a
+SUMMARY:Estadística I (media/mediana/moda) con datos reales
+DTSTART;VALUE=DATE:20260407
+DTEND;VALUE=DATE:20260411
+DESCRIPTION:Análisis estadístico de crecimiento y condiciones del huerto.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:59d38a43-8509-4d78-bb80-09562b6d063a
+SUMMARY:Semana del Mercadillo Solidario
+DTSTART;VALUE=DATE:20260602
+DTEND;VALUE=DATE:20260607
+DESCRIPTION:Preparación, venta y donación de beneficios.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:9f893ecb-caef-4410-99bb-4e103442ca04
+SUMMARY:Presentaciones finales + estreno del vídeo
+DTSTART;VALUE=DATE:20260609
+DTEND;VALUE=DATE:20260614
+DESCRIPTION:Defensa final de resultados y estreno del vídeo-resumen.
+END:VEVENT
+
+BEGIN:VEVENT
+UID:84a4d062-8c99-413a-af50-97085d92c5fd
+SUMMARY:Desmontaje, limpieza y celebración final
+DTSTART;VALUE=DATE:20260616
+DTEND;VALUE=DATE:20260621
+DESCRIPTION:Puesta a punto para verano y acto de cierre.
+END:VEVENT
+
+END:VCALENDAR
