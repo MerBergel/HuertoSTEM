@@ -1,31 +1,22 @@
-/* Fuente + fondo cálido */
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: #fdfaf6;
-}
-
-/* Tabs */
+/* Estilos mínimos adicionales a Tailwind para la SPA */
 .nav-link {
   transition: all 0.3s ease;
   border-bottom: 2px solid transparent;
 }
 .nav-link.active {
-  border-bottom-color: #16a34a; /* verde */
+  border-bottom-color: #16a34a; /* Green-600/700 */
   color: #166534;
 }
 
-/* Secciones conmutables (SPA) */
 .content-section { display: none; }
 .content-section.active { display: block; }
 
-/* Botones del cronograma */
 .timeline-btn.active {
   background-color: #16a34a;
-  color: #fff;
+  color: white;
   transform: scale(1.05);
 }
 
-/* Área del gráfico */
 .chart-container {
   position: relative;
   width: 100%;
@@ -35,48 +26,8 @@ body {
   height: 300px;
   max-height: 400px;
 }
+
 @media (min-width: 768px) {
   .chart-container { height: 400px; }
 }
-
-/* Acordeón de planificación */
-.accordion-btn[aria-expanded="true"] .chev {
-  transform: rotate(180deg);
-}
-
-/* Puntos de la línea temporal de infografía */
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -30px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #118AB2;
-  border: 3px solid #f0f9ff;
-}
-
-/* Modal QR en impresión: hacer la página limpia */
-@media print {
-  header, nav, #proyecto, #cronograma, #planificacion, #areas, #evaluacion, #infografia, footer {
-    display: none !important;
-  }
-  #recursos { display: block !important; }
-  #qrModal { position: static !important; display: block !important; background: transparent !important; }
-  #qrGrid { break-inside: avoid; }
-  .qr-label { page-break-inside: avoid; }
-}
-
-/* Tarjetas QR */
-.qr-label {
-  border: 1px solid #e5e7eb; /* stone-200 */
-  border-radius: 0.75rem;
-  padding: 0.75rem;
-  background: #fff;
-}
-.qr-es { font-weight: 700; }
-.qr-en { font-size: 0.85rem; color: #6b7280; } /* stone-500 */
-.qr-url { font-size: 0.7rem; color: #9ca3af; word-break: break-all; }
 
