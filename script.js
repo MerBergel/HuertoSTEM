@@ -1,509 +1,386 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // ----- Navegación por pestañas (SPA) -----
+  /* ===========================
+     Navegación por pestañas (SPA)
+     =========================== */
   const navLinks = document.querySelectorAll('.nav-link');
   const contentSections = document.querySelectorAll('.content-section');
 
-  function switchTab(targetId){
-    contentSections.forEach(s=>s.classList.toggle('active', s.id===targetId));
-    navLinks.forEach(l=>l.classList.toggle('active', l.dataset.target===targetId));
-    // Inicializar gráficos si se entra en secciones con canvas
-    if (targetId === 'areas')      initMainGrowthChart();
-    if (targetId === 'infografia') { initDisciplinesChart(); initInfGrowthChart(); }
+  function switchTab(targetId) {
+    contentSections.forEach(section => {
+      section.classList.toggle('active', section.id === targetId);
+    });
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.target === targetId);
+    });
   }
 
   const initialHash = window.location.hash.substring(1) || 'proyecto';
   switchTab(initialHash);
 
-  navLinks.forEach(link=>{
-    link.addEventListener('click', e=>{
-      if (!link.dataset.target) return;
+  navLinks.forEach(link => {
+    link.addEventListener('click', function (e) {
       e.preventDefault();
-      const t = link.dataset.target;
-      window.location.hash = t;
+      const targetId = this.dataset.target;
+      window.location.hash = targetId;
     });
   });
-
-  window.addEventListener('hashchange', ()=>{
+  window.addEventListener('hashchange', () => {
     const hash = window.location.hash.substring(1) || 'proyecto';
     switchTab(hash);
   });
 
-  // ----- Datos para cronograma y áreas -----
+  /* ===========================
+     Datos del proyecto
+     =========================== */
   const projectData = {
-    trimestres:{
-      '1':{
-        title:'1º Trimestre: Diseño y Planificación (Septiembre - Diciembre)',
-        content:`<ul class="list-disc list-inside space-y-3 text-stone-700">
-          <li><b>General:</b> Equipos, investigación y diseño del espacio.</li>
-          <li><b>Científico-Matemático:</b> pH/nutrientes, superficies y volúmenes.</li>
-          <li><b>Tecnológico:</b> Introducción a Arduino y blog del proyecto.</li>
-          <li><b>Artístico-Social:</b> Maquetas, logo e imagen del proyecto.</li>
-          <li><b>Lingüístico:</b> Cuaderno de campo y primeras presentaciones.</li>
-        </ul>`
+    trimestres: {
+      '1': {
+        title: '1º Trimestre: Diseño y Planificación (Septiembre – Diciembre)',
+        content: `
+          <ul class="list-disc list-inside space-y-3 text-stone-700">
+            <li><strong>General:</strong> Formación de equipos, investigación inicial y diseño del espacio.</li>
+            <li><strong>Científico-Matemático:</strong> Análisis de suelo (pH, nutrientes), cálculo de superficies y volúmenes.</li>
+            <li><strong>Tecnológico:</strong> Introducción a Arduino y creación del blog del proyecto.</li>
+            <li><strong>Artístico y Social:</strong> Maquetas, logo y estética del huerto.</li>
+            <li><strong>Lingüístico:</strong> Cuaderno de campo digital y presentaciones iniciales.</li>
+          </ul>
+        `
       },
-      '2':{
-        title:'2º Trimestre: Construcción y Desarrollo (Enero - Marzo)',
-        content:`<ul class="list-disc list-inside space-y-3 text-stone-700">
-          <li><b>General:</b> Preparación del terreno, bancales y siembras.</li>
-          <li><b>Tecnológico:</b> Riego automatizado con Arduino + app de datos.</li>
-          <li><b>Datos:</b> Registro semanal y primeras gráficas.</li>
-          <li><b>Comunicación:</b> Etiquetado bilingüe y entradas en el blog.</li>
-        </ul>`
+      '2': {
+        title: '2º Trimestre: Construcción y Desarrollo (Enero – Marzo)',
+        content: `
+          <ul class="list-disc list-inside space-y-3 text-stone-700">
+            <li><strong>General:</strong> Preparación del terreno, siembra y montaje tecnológico.</li>
+            <li><strong>Científico-Matemático:</strong> Semilleros, germinación y registro sistemático de datos.</li>
+            <li><strong>Tecnológico:</strong> Riego automatizado con Arduino y app de registro.</li>
+            <li><strong>Artístico y Social:</strong> Bancales, caminos y elementos decorativos.</li>
+            <li><strong>Lingüístico:</strong> Etiquetas bilingües y actualización del blog.</li>
+          </ul>
+        `
       },
-      '3':{
-        title:'3º Trimestre: Crecimiento y Cosecha (Abril - Junio)',
-        content:`<ul class="list-disc list-inside space-y-3 text-stone-700">
-          <li><b>Datos:</b> Estadística y visualización avanzada.</li>
-          <li><b>Optimización:</b> Trigonometría, fuerzas y mejoras.</li>
-          <li><b>Servicio:</b> Mercadillo solidario y difusión.</li>
-          <li><b>Cierre:</b> Presentaciones finales, vídeo y reflexión.</li>
-        </ul>`
+      '3': {
+        title: '3º Trimestre: Crecimiento y Cosecha (Abril – Junio)',
+        content: `
+          <ul class="list-disc list-inside space-y-3 text-stone-700">
+            <li><strong>General:</strong> Mantenimiento, análisis de datos, cosecha y difusión.</li>
+            <li><strong>Científico-Matemático:</strong> Estadística de crecimiento y control de plagas ecológico.</li>
+            <li><strong>Tecnológico:</strong> Visualización avanzada de datos y vídeo-resumen.</li>
+            <li><strong>Artístico y Social:</strong> Mercadillo solidario para la comunidad escolar.</li>
+            <li><strong>Lingüístico:</strong> Presentaciones finales y artículo de cierre en el blog.</li>
+          </ul>
+        `
       }
     },
-    areas:{
-      'cientifico':{
-        title:'Actividades Científico-Matemáticas',
-        content:`<ul class="list-disc list-inside space-y-2 text-stone-700">
-          <li>Análisis de suelo (pH, nutrientes).</li>
-          <li>Cálculos de superficies y volúmenes.</li>
-          <li>Fotosíntesis y ciclo del agua.</li>
-          <li>Registro y estadística de crecimiento.</li>
-        </ul>`
+    areas: {
+      'cientifico': {
+        title: 'Actividades Científico-Matemáticas',
+        content: `
+          <ul class="list-disc list-inside space-y-2 text-stone-700">
+            <li>Análisis del suelo (pH, nutrientes).</li>
+            <li>Cálculos de superficies y volúmenes para el diseño.</li>
+            <li>Investigación botánica y ciclo del agua/fotosíntesis.</li>
+            <li>Registro y estadística de crecimiento.</li>
+            <li>Métodos de control de plagas ecológicos.</li>
+          </ul>
+        `
       },
-      'tecnologico':{
-        title:'Actividades Tecnológicas',
-        content:`<ul class="list-disc list-inside space-y-2 text-stone-700">
-          <li>Arduino básico y sensores.</li>
-          <li>Sistema de riego automatizado.</li>
-          <li>App sencilla de registro.</li>
-          <li>Gráficas y publicación web.</li>
-        </ul>`
+      'tecnologico': {
+        title: 'Actividades Tecnológicas',
+        content: `
+          <ul class="list-disc list-inside space-y-2 text-stone-700">
+            <li>Introducción a Arduino y electrónica básica.</li>
+            <li>Blog del proyecto y buenas prácticas digitales.</li>
+            <li>Riego automatizado con sensores y relé.</li>
+            <li>App sencilla para registro de datos (ej. MIT App Inventor).</li>
+            <li>Hojas de cálculo y gráficos.</li>
+            <li>Vídeo-resumen final.</li>
+          </ul>
+        `
       },
-      'artistico':{
-        title:'Actividades Artísticas y Sociales',
-        content:`<ul class="list-disc list-inside space-y-2 text-stone-700">
-          <li>Diseño del espacio, maquetas y señalética.</li>
-          <li>Imagen del proyecto y difusión.</li>
-          <li>Mercadillo solidario.</li>
-        </ul>`
+      'artistico': {
+        title: 'Actividades Artísticas y Sociales',
+        content: `
+          <ul class="list-disc list-inside space-y-2 text-stone-700">
+            <li>Diseño funcional y estético del huerto.</li>
+            <li>Maquetas, señalética y elementos decorativos.</li>
+            <li>Mercadillo solidario y difusión.</li>
+          </ul>
+        `
       },
-      'linguistico':{
-        title:'Actividades Lingüísticas',
-        content:`<ul class="list-disc list-inside space-y-2 text-stone-700">
-          <li>Cuaderno de campo digital colaborativo.</li>
-          <li>Etiquetado bilingüe de plantas.</li>
-          <li>Presentaciones orales y artículos del blog.</li>
-        </ul>`
+      'linguistico': {
+        title: 'Actividades Lingüísticas',
+        content: `
+          <ul class="list-disc list-inside space-y-2 text-stone-700">
+            <li>Cuaderno de campo digital colaborativo.</li>
+            <li>Presentaciones orales y storytelling científico.</li>
+            <li>Etiquetas bilingües y entradas del blog.</li>
+          </ul>
+        `
       }
     }
   };
 
-  // ----- Cronograma (resumen) -----
+  /* ===========================
+     Cronograma (Trimestres)
+     =========================== */
   const timelineBtns = document.querySelectorAll('.timeline-btn');
   const timelineContent = document.getElementById('timeline-content');
-  function showTrimestre(num){
-    const d = projectData.trimestres[num];
-    timelineContent.innerHTML = `<h3 class="text-2xl font-bold text-stone-800 mb-4">${d.title}</h3>${d.content}`;
-    timelineBtns.forEach(b=>b.classList.toggle('active', b.dataset.trimestre===num));
-  }
-  timelineBtns.forEach(btn=>btn.addEventListener('click',()=>showTrimestre(btn.dataset.trimestre)));
-  if (timelineBtns.length) showTrimestre('1');
-
-  // ----- Áreas STEAM -----
-  const steamCards  = document.querySelectorAll('.steam-card');
-  const steamContent= document.getElementById('steam-content');
-  const chartArea   = document.getElementById('chart-area');
-
-  function showArea(id){
-    const d = projectData.areas[id];
-    steamContent.innerHTML = `<h3 class="text-2xl font-bold text-stone-800 mb-4">${d.title}</h3>${d.content}`;
-    chartArea.style.display = id==='cientifico' ? 'block' : 'none';
-
-    // Anillos de foco
-    steamCards.forEach(c=>c.classList.remove('ring-2','ring-offset-2','ring-green-500','ring-blue-500','ring-yellow-500','ring-red-500'));
-    const card = document.querySelector(`.steam-card[data-area="${id}"]`);
-    if(id==='cientifico')  card.classList.add('ring-2','ring-offset-2','ring-green-500');
-    if(id==='tecnologico') card.classList.add('ring-2','ring-offset-2','ring-blue-500');
-    if(id==='artistico')   card.classList.add('ring-2','ring-offset-2','ring-yellow-500');
-    if(id==='linguistico') card.classList.add('ring-2','ring-offset-2','ring-red-500');
-  }
-  steamCards.forEach(c=>c.addEventListener('click',()=>showArea(c.dataset.area)));
-  if (steamCards.length) showArea('cientifico');
-
-  // ----- Gráfico principal (Áreas) -----
-  let mainChart, mainChartInited = false, chartWeek = 4;
-  function initMainGrowthChart(){
-    if (mainChartInited) return;
-    const canvas = document.getElementById('growthChartMain');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    mainChart = new Chart(ctx,{
-      type:'line',
-      data:{
-        labels:['Semana 1','Semana 2','Semana 3','Semana 4'],
-        datasets:[
-          {label:'Altura Tomatera (cm)', data:[5,8,12,16], borderColor:'#16a34a', backgroundColor:'rgba(22,163,74,.1)', tension:.3, fill:true},
-          {label:'Altura Lechuga (cm)',  data:[3,5,7,9],   borderColor:'#65a30d', backgroundColor:'rgba(101,163,13,.1)',tension:.3, fill:true}
-        ]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        scales:{ y:{beginAtZero:true,title:{display:true,text:'Altura (cm)'}}, x:{title:{display:true,text:'Tiempo'}}},
-        plugins:{ tooltip:{callbacks:{label:(c)=>`${c.dataset.label}: ${c.parsed.y} cm`}}}
-      }
+  function showTrimestre(trimestreNum) {
+    const data = projectData.trimestres[trimestreNum];
+    timelineContent.innerHTML = `<h3 class="text-2xl font-bold text-stone-800 mb-4">${data.title}</h3>${data.content}`;
+    timelineBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.trimestre === trimestreNum);
     });
-    const addBtn = document.getElementById('addDataBtn');
-    if (addBtn){
-      addBtn.addEventListener('click',()=>{
-        chartWeek++;
-        mainChart.data.labels.push(`Semana ${chartWeek}`);
-        mainChart.data.datasets[0].data.push(Math.floor(Math.random()*5)+16+(chartWeek-4)*4);
-        mainChart.data.datasets[1].data.push(Math.floor(Math.random()*2)+9+(chartWeek-4)*1.5);
-        mainChart.update();
-      });
-    }
-    mainChartInited = true;
+  }
+  timelineBtns.forEach(btn => {
+    btn.addEventListener('click', () => showTrimestre(btn.dataset.trimestre));
+  });
+  showTrimestre('1');
+
+  /* ===========================
+     Áreas STEAM + Chart main
+     =========================== */
+  const steamCards = document.querySelectorAll('.steam-card');
+  const steamContent = document.getElementById('steam-content');
+  const chartArea = document.getElementById('chart-area');
+
+  function showArea(areaId) {
+    const data = projectData.areas[areaId];
+    steamContent.innerHTML = `<h3 class="text-2xl font-bold text-stone-800 mb-4">${data.title}</h3>${data.content}`;
+    steamCards.forEach(card =>
+      card.classList.remove('ring-2', 'ring-offset-2', 'ring-green-500', 'ring-blue-500', 'ring-yellow-500', 'ring-red-500')
+    );
+    const cardEl = document.querySelector(`.steam-card[data-area="${areaId}"]`);
+    if (areaId === 'cientifico') cardEl.classList.add('ring-2', 'ring-offset-2', 'ring-green-500');
+    if (areaId === 'tecnologico') cardEl.classList.add('ring-2', 'ring-offset-2', 'ring-blue-500');
+    if (areaId === 'artistico') cardEl.classList.add('ring-2', 'ring-offset-2', 'ring-yellow-500');
+    if (areaId === 'linguistico') cardEl.classList.add('ring-2', 'ring-offset-2', 'ring-red-500');
+
+    chartArea.style.display = areaId === 'cientifico' ? 'block' : 'none';
   }
 
-  // ----- Infografía: donut + línea -----
-  let donutInited=false, lineInfInited=false;
+  steamCards.forEach(card => {
+    card.addEventListener('click', () => showArea(card.dataset.area));
+  });
+  showArea('cientifico');
 
+  // Chart principal en Áreas
+  const ctxMain = document.getElementById('growthChartMain').getContext('2d');
+  let chartWeek = 4;
+  const growthChartMain = new Chart(ctxMain, {
+    type: 'line',
+    data: {
+      labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
+      datasets: [
+        {
+          label: 'Altura Tomatera (cm)',
+          data: [5, 8, 12, 16],
+          borderColor: '#16a34a',
+          backgroundColor: 'rgba(22, 163, 74, 0.1)',
+          tension: 0.3,
+          fill: true
+        },
+        {
+          label: 'Altura Lechuga (cm)',
+          data: [3, 5, 7, 9],
+          borderColor: '#65a30d',
+          backgroundColor: 'rgba(101, 163, 13, 0.1)',
+          tension: 0.3,
+          fill: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Altura (cm)' } },
+        x: { title: { display: true, text: 'Tiempo' } }
+      },
+      plugins: {
+        tooltip: { callbacks: { label: (c)=> `${c.dataset.label}: ${c.parsed.y} cm` } }
+      }
+    }
+  });
+
+  document.getElementById('addDataBtnMain').addEventListener('click', function () {
+    chartWeek++;
+    growthChartMain.data.labels.push(`Semana ${chartWeek}`);
+    growthChartMain.data.datasets[0].data.push(Math.floor(Math.random() * 5) + 16 + (chartWeek - 4) * 4);
+    growthChartMain.data.datasets[1].data.push(Math.floor(Math.random() * 2) + 9 + (chartWeek - 4) * 1.5);
+    growthChartMain.update();
+  });
+
+  /* ===========================
+     Infografía: Donut + Línea
+     =========================== */
   function wrapLabel(label) {
-    if (!label || label.length <= 16) return label;
+    if (label.length <= 16) return label;
     const words = label.split(' ');
     const lines = [];
-    let current = '';
+    let currentLine = '';
     for (const w of words) {
-      if ((current + ' ' + w).trim().length > 16) { lines.push(current.trim()); current = w; }
-      else current = (current + ' ' + w).trim();
+      if ((currentLine + ' ' + w).trim().length > 16) {
+        lines.push(currentLine.trim());
+        currentLine = w;
+      } else {
+        currentLine = (currentLine + ' ' + w).trim();
+      }
     }
-    if (current) lines.push(current);
+    if (currentLine) lines.push(currentLine);
     return lines;
   }
 
-  function ttTitle(items){
+  const tooltipTitle = (items) => {
     const it = items[0];
-    let l = it.chart.data.labels[it.dataIndex];
-    return Array.isArray(l) ? l.join(' ') : l;
-  }
+    let label = it.chart.data.labels[it.dataIndex];
+    return Array.isArray(label) ? label.join(' ') : label;
+    };
 
-  function initDisciplinesChart(){
-    if (donutInited) return;
-    const cv = document.getElementById('disciplinesChartInf');
-    if (!cv) return;
-    const ctx = cv.getContext('2d');
-    new Chart(ctx,{
-      type:'doughnut',
-      data:{
-        labels:[wrapLabel('Científico-Matemático'), wrapLabel('Tecnológico'), wrapLabel('Artístico y Social'), wrapLabel('Lingüístico')],
-        datasets:[{ data:[25,25,25,25], backgroundColor:['#FF6B6B','#06D6A0','#FFD166','#118AB2'], borderColor:'#fff', borderWidth:4 }]
-      },
-      options:{ responsive:true, maintainAspectRatio:false,
-        plugins:{ legend:{position:'bottom'}, tooltip:{callbacks:{title:ttTitle}} } }
-    });
-    donutInited = true;
-  }
-
-  function initInfGrowthChart(){
-    if (lineInfInited) return;
-    const cv = document.getElementById('growthChartInf');
-    if (!cv) return;
-    const ctx = cv.getContext('2d');
-    new Chart(ctx,{
-      type:'line',
-      data:{
-        labels:['Semana 1','Semana 2','Semana 4','Semana 6','Semana 8','Semana 10'],
-        datasets:[
-          { label:'Altura Tomatera (cm)', data:[5,8,15,22,30,42], borderColor:'#FF6B6B', backgroundColor:'rgba(255,107,107,.2)', tension:.4, fill:true },
-          { label:'Altura Lechuga (cm)',  data:[3,5,8,11,13,15], borderColor:'#06D6A0', backgroundColor:'rgba(6,214,160,.2)',  tension:.4, fill:true }
-        ]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        scales:{ y:{beginAtZero:true,title:{display:true,text:'Altura (cm)'}}, x:{title:{display:true,text:'Semanas'}} },
-        plugins:{ tooltip:{callbacks:{title:ttTitle}} }
+  // Donut
+  const disciplinesCtx = document.getElementById('disciplinesChart').getContext('2d');
+  new Chart(disciplinesCtx, {
+    type: 'doughnut',
+    data: {
+      labels: [
+        wrapLabel('Científico-Matemático'),
+        wrapLabel('Tecnológico'),
+        wrapLabel('Artístico y Social'),
+        wrapLabel('Lingüístico')
+      ],
+      datasets: [{
+        data: [25, 25, 25, 25],
+        backgroundColor: ['#FF6B6B', '#06D6A0', '#FFD166', '#118AB2'],
+        borderColor: '#fff',
+        borderWidth: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: { callbacks: { title: tooltipTitle } }
       }
-    });
-    lineInfInited = true;
-  }
-
-  // ----- Acordeones de Planificación -----
-  const accBtns    = document.querySelectorAll('.accordion-btn');
-  const expandAll  = document.getElementById('expandAll');
-  const collapseAll= document.getElementById('collapseAll');
-  const printBtn   = document.getElementById('printPlan');
-
-  accBtns.forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const target = document.getElementById(btn.dataset.target);
-      const expanded = btn.getAttribute('aria-expanded')==='true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      target.classList.toggle('hidden', expanded);
-    });
+    }
   });
-  if (expandAll)  expandAll.addEventListener('click',()=>accBtns.forEach(b=>{b.setAttribute('aria-expanded','true'); document.getElementById(b.dataset.target).classList.remove('hidden');}));
-  if (collapseAll)collapseAll.addEventListener('click',()=>accBtns.forEach(b=>{b.setAttribute('aria-expanded','false');document.getElementById(b.dataset.target).classList.add('hidden');}));
-  if (printBtn)   printBtn.addEventListener('click',()=>window.print());
 
-  // ----- Generador de Etiquetas QR -----
-  const openQR = document.getElementById('openQR');
-  const closeQR = document.getElementById('closeQR');
-  const qrModal = document.getElementById('qrModal');
-  const genQR = document.getElementById('genQR');
-  const printQR = document.getElementById('printQR');
-  const plantInput = document.getElementById('plantInput');
-  const qrGrid = document.getElementById('qrGrid');
-  const qrSize = document.getElementById('qrSize');
-  const qrCols = document.getElementById('qrCols');
-
-  // Relleno de ejemplo
-  const defaultPlants = [
-    "Tomatera | Tomato | https://es.wikipedia.org/wiki/Tomate",
-    "Lechuga | Lettuce | https://es.wikipedia.org/wiki/Lactuca_sativa",
-    "Pimiento | Pepper | https://es.wikipedia.org/wiki/Capsicum",
-    "Calabacín | Zucchini | https://es.wikipedia.org/wiki/Cucurbita_pepo",
-    "Zanahoria | Carrot | https://es.wikipedia.org/wiki/Daucus_carota",
-    "Espinaca | Spinach | https://es.wikipedia.org/wiki/Spinacia_oleracea",
-    "Fresa | Strawberry | https://es.wikipedia.org/wiki/Fragaria",
-    "Romero | Rosemary | https://es.wikipedia.org/wiki/Rosmarinus_officinalis",
-    "Tomillo | Thyme | https://es.wikipedia.org/wiki/Thymus_(planta)",
-    "Albahaca | Basil | https://es.wikipedia.org/wiki/Ocimum_basilicum",
-    "Perejil | Parsley | https://es.wikipedia.org/wiki/Petroselinum_crispum",
-    "Cebolla | Onion | https://es.wikipedia.org/wiki/Allium_cepa"
-  ];
-  if (plantInput && !plantInput.value.trim()) {
-    plantInput.value = defaultPlants.join("\n");
-  }
-
-  function openModal(){ qrModal.classList.remove('hidden'); qrModal.classList.add('flex'); }
-  function closeModal(){ qrModal.classList.add('hidden'); qrModal.classList.remove('flex'); }
-
-  if (openQR) openQR.addEventListener('click', openModal);
-  if (closeQR) closeQR.addEventListener('click', closeModal);
-  if (qrModal) qrModal.addEventListener('click', (e)=>{ if (e.target===qrModal) closeModal(); });
-
-  function clearGrid(){
-    while (qrGrid.firstChild) qrGrid.removeChild(qrGrid.firstChild);
-  }
-
-  function makeLabel({es,en,url}, size){
-    const wrap = document.createElement('div');
-    wrap.className = "qr-label flex flex-col items-center";
-    // QR
-    const qrBox = document.createElement('div');
-    qrBox.style.width = `${size}px`;
-    qrBox.style.height = `${size}px`;
-    new QRCode(qrBox, { text: url, width: size, height: size, correctLevel: QRCode.CorrectLevel.M });
-    // Textos
-    const esEl = document.createElement('div'); esEl.className = "qr-es mt-2"; esEl.textContent = es;
-    const enEl = document.createElement('div'); enEl.className = "qr-en";     enEl.textContent = en;
-    const urlEl= document.createElement('div'); urlEl.className= "qr-url mt-1";urlEl.textContent = url;
-    wrap.append(qrBox, esEl, enEl, urlEl);
-    return wrap;
-  }
-
-  function parseLines(text){
-    return text.split('\n')
-      .map(l=>l.trim())
-      .filter(Boolean)
-      .map(l=>{
-        const [es,en,url] = l.split('|').map(s=> (s||'').trim());
-        return {es, en, url};
-      })
-      .filter(o=>o.es && o.en && o.url);
-  }
-
-  function generateQR(){
-    clearGrid();
-    const size = Math.max(96, Math.min(256, parseInt(qrSize.value || "128", 10)));
-    const cols = Math.max(2, Math.min(5, parseInt(qrCols.value || "4", 10)));
-    qrGrid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
-    const list = parseLines(plantInput.value);
-    list.forEach(item=> qrGrid.appendChild(makeLabel(item, size)));
-  }
-
-  if (genQR) genQR.addEventListener('click', generateQR);
-  if (printQR) printQR.addEventListener('click', ()=>window.print());
-  // En script.js
-async function loadCSVtoChart(chart, url){
-  const res = await fetch(url);
-  const text = await res.text();
-  const rows = text.trim().split('\n').slice(1).map(r=>r.split(','));
-  const semanas = []; const tomatera = []; const lechuga = [];
-  rows.forEach((r,i)=>{ // adapta estas columnas a tu CSV real
-    semanas.push(`Obs ${i+1}`);
-    tomatera.push(parseFloat(r[6]||0)); // Altura_cm
-    lechuga.push(parseFloat(r[7]||0));  // Numero_Hojas (ejemplo) o cambia a otra planta
+  // Línea (infografía)
+  const growthCtxInfo = document.getElementById('growthChartInfo').getContext('2d');
+  new Chart(growthCtxInfo, {
+    type: 'line',
+    data: {
+      labels: ['Semana 1', 'Semana 2', 'Semana 4', 'Semana 6', 'Semana 8', 'Semana 10'],
+      datasets: [{
+        label: 'Altura Tomatera (cm)',
+        data: [5, 8, 15, 22, 30, 42],
+        borderColor: '#FF6B6B',
+        backgroundColor: 'rgba(255, 107, 107, 0.2)',
+        tension: 0.4,
+        fill: true
+      }, {
+        label: 'Altura Lechuga (cm)',
+        data: [3, 5, 8, 11, 13, 15],
+        borderColor: '#06D6A0',
+        backgroundColor: 'rgba(6, 214, 160, 0.2)',
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: { beginAtZero: true, title: { display: true, text: 'Altura (cm)' } },
+        x: { title: { display: true, text: 'Semanas de crecimiento' } }
+      },
+      plugins: { tooltip: { callbacks: { title: tooltipTitle } } }
+    }
   });
-  chart.data.labels = semanas;
-  chart.data.datasets[0].data = tomatera;
-  chart.data.datasets[1].data = lechuga;
-  chart.update();
-}
-document.getElementById('loadCSV')?.addEventListener('click',()=>loadCSVtoChart(mainChart,'assets/cuaderno_campo_2025-2026.csv'));
 
+  /* ===========================
+     Cronograma de Hitos (Recursos)
+     =========================== */
+  const listEl = document.getElementById('timelineList');
+  if (listEl) {
+    const fmt = (d) => new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).format(d).replace('.', '');
+    function rango(a, b) {
+      const da = new Date(a), db = b ? new Date(b) : null;
+      if (!db) return fmt(da);
+      const sameMonth = da.getFullYear() === db.getFullYear() && da.getMonth() === db.getMonth();
+      if (sameMonth) {
+        const diaA = String(da.getDate()).padStart(2, '0');
+        const diaB = String(db.getDate()).padStart(2, '0');
+        const mesY = new Intl.DateTimeFormat('es-ES', { month: 'short', year: 'numeric' }).format(db).replace('.', '');
+        return `${diaA}–${diaB} ${mesY}`;
+      }
+      return `${fmt(da)} – ${fmt(db)}`;
+    }
+
+    const HITOS = [
+      { tri:1, start:'2025-09-08', end:null,         titulo:'Inicio del proyecto',                        desc:'Lanzamiento del reto anual y equipos.',          tag:'Inicio' },
+      { tri:1, start:'2025-11-03', end:'2025-11-14', titulo:'Bloque "Hola Arduino"',                       desc:'Entradas/salidas, LED y sensor temperatura.',     tag:'Tecnología' },
+      { tri:1, start:'2025-12-09', end:'2025-12-12', titulo:'Defensa T1 + Votación',                       desc:'Presentación de diseños y elección para T2.',     tag:'Presentación' },
+      { tri:2, start:'2026-01-07', end:'2026-01-09', titulo:'Inicio de construcción',                      desc:'Plan de obra, materiales y bancales.',            tag:'Construcción' },
+      { tri:2, start:'2026-02-03', end:'2026-02-07', titulo:'Siembra + Riego v1',                          desc:'Siembra directa y riego con bomba/goteros.',      tag:'Agronomía' },
+      { tri:2, start:'2026-02-09', end:'2026-02-13', titulo:'Riego v2 con Arduino',                        desc:'Relé + sensor de humedad, primeras automatizaciones.', tag:'Tecnología' },
+      { tri:2, start:'2026-02-23', end:'2026-02-27', titulo:'Trasplantes + entrada en el blog',            desc:'Trasplante de plantones y difusión.',             tag:'Comunicación' },
+      { tri:2, start:'2026-03-02', end:'2026-03-13', titulo:'Ajuste de riego + primeras gráficas',         desc:'Calibración y visualización de datos.',           tag:'Datos' },
+      { tri:3, start:'2026-04-07', end:'2026-04-10', titulo:'Estadística I (media/mediana/moda)',          desc:'Análisis con datos reales del huerto.',           tag:'Ciencia' },
+      { tri:3, start:'2026-06-02', end:'2026-06-06', titulo:'Semana del Mercadillo Solidario',             desc:'Organización, venta y donación.',                 tag:'Servicio' },
+      { tri:3, start:'2026-06-09', end:'2026-06-13', titulo:'Presentaciones finales + vídeo',              desc:'Defensa final y estreno del vídeo-resumen.',      tag:'Presentación' },
+      { tri:3, start:'2026-06-16', end:'2026-06-20', titulo:'Desmontaje y cierre',                         desc:'Mantenimiento y celebración final.',              tag:'Cierre' },
+    ].map(h => ({ ...h, d0: new Date(h.start), d1: h.end ? new Date(h.end) : null }))
+     .sort((a, b) => a.d0 - b.d0);
+
+    function chip(text) {
+      const palette = {
+        'Inicio':'bg-emerald-100 text-emerald-700',
+        'Tecnología':'bg-blue-100 text-blue-700',
+        'Presentación':'bg-purple-100 text-purple-700',
+        'Construcción':'bg-amber-100 text-amber-700',
+        'Agronomía':'bg-lime-100 text-lime-700',
+        'Comunicación':'bg-sky-100 text-sky-700',
+        'Datos':'bg-cyan-100 text-cyan-700',
+        'Ciencia':'bg-rose-100 text-rose-700',
+        'Servicio':'bg-orange-100 text-orange-700',
+        'Cierre':'bg-stone-100 text-stone-700'
+      };
+      const cls = palette[text] || 'bg-stone-100 text-stone-700';
+      return `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold ${cls}">${text}</span>`;
+    }
+
+    function itemHTML(h) {
+      const fecha = rango(h.start, h.end);
+      return `
+        <div class="relative ml-2">
+          <span class="absolute -left-2 top-2 w-3 h-3 rounded-full bg-green-600 border-2 border-white shadow"></span>
+          <div class="bg-white border border-stone-200 rounded-lg p-3 shadow-sm">
+            <div class="flex items-center justify-between gap-2">
+              <p class="text-sm font-bold text-stone-900">${fecha}</p>
+              ${chip(h.tag)}
+            </div>
+            <h4 class="mt-1 font-bold text-stone-900">${h.titulo}</h4>
+            <p class="text-sm text-stone-600">${h.desc}</p>
+            <p class="text-xs text-stone-400 mt-1">Trimestre ${h.tri}</p>
+          </div>
+        </div>`;
+    }
+
+    function render(tri = 'all') {
+      const data = tri === 'all' ? HITOS : HITOS.filter(h => String(h.tri) === String(tri));
+      listEl.innerHTML = data.map(itemHTML).join('');
+    }
+
+    document.querySelectorAll('[data-crono-filter]').forEach(btn => {
+      btn.addEventListener('click', () => render(btn.getAttribute('data-crono-filter')));
+    });
+    document.getElementById('printTimeline')?.addEventListener('click', () => window.print());
+
+    render('all');
+  }
 });
 
-const ENABLE_GAMIFICATION = false;
-if (ENABLE_GAMIFICATION) {
-  /* aquí dentro pegas el bloque anterior de puntuaciones interactivas */
-}
-
-
-  // Eventos
-  scoreBody.addEventListener('click', (e)=>{
-    const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
-    const id = btn.dataset.id;
-    const cat = btn.dataset.cat;
-    const action = btn.dataset.action;
-    const i = teams.findIndex(t=>t.id===id);
-    if (i<0) return;
-
-    if (action==='plus' && cat){
-      teams[i][cat] = (teams[i][cat]||0) + 1;
-    } else if (action==='minus' && cat){
-      teams[i][cat] = Math.max(0, (teams[i][cat]||0) - 1);
-    } else if (action==='remove'){
-      teams.splice(i,1);
-    }
-    save(teams); render();
-  });
-
-  addTeamBtn?.addEventListener('click', ()=>{
-    const name = (teamName.value || '').trim();
-    if (!name) return teamName.focus();
-    teams.push({ id: uid(), name, cte:0, tec:0, art:0, lin:0, serv:0 });
-    teamName.value = '';
-    save(teams); render();
-  });
-
-  resetBtn?.addEventListener('click', ()=>{
-    if (!confirm('¿Seguro que quieres reiniciar todas las puntuaciones?')) return;
-    teams = teams.map(t=>({ ...t, cte:0, tec:0, art:0, lin:0, serv:0 }));
-    save(teams); render();
-  });
-
-  exportBtn?.addEventListener('click', ()=>{
-    const blob = new Blob([JSON.stringify(teams,null,2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'puntuaciones_huerto_2025-2026.json';
-    document.body.appendChild(a); a.click();
-    URL.revokeObjectURL(url); a.remove();
-  });
-
-  importInput?.addEventListener('change', ()=>{
-    const file = importInput.files?.[0]; if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ()=>{
-      try {
-        const data = JSON.parse(reader.result);
-        if (!Array.isArray(data)) throw new Error('Formato inválido');
-        teams = data;
-        save(teams); render();
-      } catch(e){ alert('No se pudo importar: ' + e.message); }
-    };
-    reader.readAsText(file);
-    importInput.value = '';
-  });
-
-  printBtn?.addEventListener('click', ()=>window.print());
-
-  // Arranque
-  render();
-})();
-
-/* ===========================
-   Cronograma de Hitos 2025–2026
-   =========================== */
-(function(){
-  const $list = document.getElementById('timelineList');
-  if (!$list) return;
-
-  // Utilidad para formatear rango de fechas en ES
-  const fmt = (d) => new Intl.DateTimeFormat('es-ES', { day:'2-digit', month:'short', year:'numeric' }).format(d).replace('.', '');
-  function rango(a, b){
-    const da = new Date(a), db = b ? new Date(b) : null;
-    if (!db) return fmt(da);
-    const sameMonth = da.getFullYear()===db.getFullYear() && da.getMonth()===db.getMonth();
-    if (sameMonth) {
-      // 03–14 nov 2025
-      const diaA = String(da.getDate()).padStart(2,'0');
-      const diaB = String(db.getDate()).padStart(2,'0');
-      const mesY = new Intl.DateTimeFormat('es-ES',{ month:'short', year:'numeric'}).format(db).replace('.', '');
-      return `${diaA}–${diaB} ${mesY}`;
-    }
-    return `${fmt(da)} – ${fmt(db)}`;
-  }
-
-  // Datos de hitos (trimestre: 1,2,3)
-  const HITOS = [
-    { tri:1, start:'2025-09-08',                end:null,         titulo:'Inicio del proyecto',                       desc:'Lanzamiento del reto anual y organización de equipos.', tag:'Inicio' },
-    { tri:1, start:'2025-11-03',                end:'2025-11-14', titulo:'Bloque "Hola Arduino"',                    desc:'Entradas/salidas, LED y sensor de temperatura.',         tag:'Tecnología' },
-    { tri:1, start:'2025-12-09',                end:'2025-12-12', titulo:'Defensa T1 + Votación',                    desc:'Presentación de diseños y elección para T2.',           tag:'Presentación' },
-    { tri:2, start:'2026-01-07',                end:'2026-01-09', titulo:'Inicio de construcción',                   desc:'Plan de obra, materiales y organización en bancales.',  tag:'Construcción' },
-    { tri:2, start:'2026-02-03',                end:'2026-02-07', titulo:'Siembra + Riego v1',                       desc:'Siembra directa y riego con bomba/goteros.',            tag:'Agronomía' },
-    { tri:2, start:'2026-02-09',                end:'2026-02-13', titulo:'Riego v2 con Arduino',                     desc:'Relé + sensor de humedad y primeras automatizaciones.', tag:'Tecnología' },
-    { tri:2, start:'2026-02-23',                end:'2026-02-27', titulo:'Trasplantes + entrada en el blog',         desc:'Trasplante de plantones y difusión.',                    tag:'Comunicación' },
-    { tri:2, start:'2026-03-02',                end:'2026-03-13', titulo:'Ajuste de riego + primeras gráficas',      desc:'Calibración y visualización de datos.',                 tag:'Datos' },
-    { tri:3, start:'2026-04-07',                end:'2026-04-10', titulo:'Estadística I (media/mediana/moda)',       desc:'Análisis con datos reales del huerto.',                 tag:'Ciencia' },
-    { tri:3, start:'2026-06-02',                end:'2026-06-06', titulo:'Semana del Mercadillo Solidario',          desc:'Organización, venta y donación.',                       tag:'Servicio' },
-    { tri:3, start:'2026-06-09',                end:'2026-06-13', titulo:'Presentaciones finales + vídeo',           desc:'Defensa final y estreno del vídeo-resumen.',            tag:'Presentación' },
-    { tri:3, start:'2026-06-16',                end:'2026-06-20', titulo:'Desmontaje y cierre',                      desc:'Mantenimiento, limpieza y celebración final.',          tag:'Cierre' },
-  ]
-  .map(h=>({ ...h, d0: new Date(h.start), d1: h.end ? new Date(h.end) : null }))
-  .sort((a,b)=> a.d0 - b.d0);
-
-  function chip(text){
-    const palette = {
-      'Inicio':'bg-emerald-100 text-emerald-700',
-      'Tecnología':'bg-blue-100 text-blue-700',
-      'Presentación':'bg-purple-100 text-purple-700',
-      'Construcción':'bg-amber-100 text-amber-700',
-      'Agronomía':'bg-lime-100 text-lime-700',
-      'Comunicación':'bg-sky-100 text-sky-700',
-      'Datos':'bg-cyan-100 text-cyan-700',
-      'Ciencia':'bg-rose-100 text-rose-700',
-      'Servicio':'bg-orange-100 text-orange-700',
-      'Cierre':'bg-stone-100 text-stone-700'
-    };
-    const cls = palette[text] || 'bg-stone-100 text-stone-700';
-    return `<span class="inline-block px-2 py-1 rounded-full text-xs font-semibold ${cls}">${text}</span>`;
-  }
-
-  function itemHTML(h){
-    const fecha = rango(h.start, h.end);
-    return `
-      <div class="relative ml-2">
-        <!-- punto -->
-        <span class="absolute -left-2 top-2 w-3 h-3 rounded-full bg-green-600 border-2 border-white shadow"></span>
-        <div class="bg-white border border-stone-200 rounded-lg p-3 shadow-sm">
-          <div class="flex items-center justify-between gap-2">
-            <p class="text-sm font-bold text-stone-900">${fecha}</p>
-            ${chip(h.tag)}
-          </div>
-          <h4 class="mt-1 font-bold text-stone-900">${h.titulo}</h4>
-          <p class="text-sm text-stone-600">${h.desc}</p>
-          <p class="text-xs text-stone-400 mt-1">Trimestre ${h.tri}</p>
-        </div>
-      </div>`;
-  }
-
-  function render(tri='all'){
-    const data = tri==='all' ? HITOS : HITOS.filter(h=>String(h.tri)===String(tri));
-    $list.innerHTML = data.map(itemHTML).join('');
-  }
-
-  // Controles
-  document.querySelectorAll('[data-crono-filter]').forEach(btn=>{
-    btn.addEventListener('click', ()=> render(btn.getAttribute('data-crono-filter')));
-  });
-  document.getElementById('printTimeline')?.addEventListener('click', ()=>window.print());
-
-  // Inicio
-  render('all');
-})();
 
 
 
