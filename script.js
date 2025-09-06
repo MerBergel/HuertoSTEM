@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   function switchTab(targetId){
     contentSections.forEach(s=>s.classList.toggle('active', s.id===targetId));
     navLinks.forEach(l=>l.classList.toggle('active', l.dataset.target===targetId));
-    // Inicializa gráficos si se entra en secciones con canvas
+    // Inicializar gráficos si se entra en secciones con canvas
     if (targetId === 'areas')      initMainGrowthChart();
     if (targetId === 'infografia') { initDisciplinesChart(); initInfGrowthChart(); }
   }
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
         content:`<ul class="list-disc list-inside space-y-3 text-stone-700">
           <li><b>General:</b> Equipos, investigación y diseño del espacio.</li>
           <li><b>Científico-Matemático:</b> pH/nutrientes, superficies y volúmenes.</li>
-            <li><b>Tecnológico:</b> Introducción a Arduino y blog del proyecto.</li>
+          <li><b>Tecnológico:</b> Introducción a Arduino y blog del proyecto.</li>
           <li><b>Artístico-Social:</b> Maquetas, logo e imagen del proyecto.</li>
           <li><b>Lingüístico:</b> Cuaderno de campo y primeras presentaciones.</li>
         </ul>`
@@ -244,5 +244,85 @@ document.addEventListener('DOMContentLoaded', function () {
   if (expandAll)  expandAll.addEventListener('click',()=>accBtns.forEach(b=>{b.setAttribute('aria-expanded','true'); document.getElementById(b.dataset.target).classList.remove('hidden');}));
   if (collapseAll)collapseAll.addEventListener('click',()=>accBtns.forEach(b=>{b.setAttribute('aria-expanded','false');document.getElementById(b.dataset.target).classList.add('hidden');}));
   if (printBtn)   printBtn.addEventListener('click',()=>window.print());
+
+  // ----- Generador de Etiquetas QR -----
+  const openQR = document.getElementById('openQR');
+  const closeQR = document.getElementById('closeQR');
+  const qrModal = document.getElementById('qrModal');
+  const genQR = document.getElementById('genQR');
+  const printQR = document.getElementById('printQR');
+  const plantInput = document.getElementById('plantInput');
+  const qrGrid = document.getElementById('qrGrid');
+  const qrSize = document.getElementById('qrSize');
+  const qrCols = document.getElementById('qrCols');
+
+  // Relleno de ejemplo
+  const defaultPlants = [
+    "Tomatera | Tomato | https://es.wikipedia.org/wiki/Tomate",
+    "Lechuga | Lettuce | https://es.wikipedia.org/wiki/Lactuca_sativa",
+    "Pimiento | Pepper | https://es.wikipedia.org/wiki/Capsicum",
+    "Calabacín | Zucchini | https://es.wikipedia.org/wiki/Cucurbita_pepo",
+    "Zanahoria | Carrot | https://es.wikipedia.org/wiki/Daucus_carota",
+    "Espinaca | Spinach | https://es.wikipedia.org/wiki/Spinacia_oleracea",
+    "Fresa | Strawberry | https://es.wikipedia.org/wiki/Fragaria",
+    "Romero | Rosemary | https://es.wikipedia.org/wiki/Rosmarinus_officinalis",
+    "Tomillo | Thyme | https://es.wikipedia.org/wiki/Thymus_(planta)",
+    "Albahaca | Basil | https://es.wikipedia.org/wiki/Ocimum_basilicum",
+    "Perejil | Parsley | https://es.wikipedia.org/wiki/Petroselinum_crispum",
+    "Cebolla | Onion | https://es.wikipedia.org/wiki/Allium_cepa"
+  ];
+  if (plantInput && !plantInput.value.trim()) {
+    plantInput.value = defaultPlants.join("\n");
+  }
+
+  function openModal(){ qrModal.classList.remove('hidden'); qrModal.classList.add('flex'); }
+  function closeModal(){ qrModal.classList.add('hidden'); qrModal.classList.remove('flex'); }
+
+  if (openQR) openQR.addEventListener('click', openModal);
+  if (closeQR) closeQR.addEventListener('click', closeModal);
+  if (qrModal) qrModal.addEventListener('click', (e)=>{ if (e.target===qrModal) closeModal(); });
+
+  function clearGrid(){
+    while (qrGrid.firstChild) qrGrid.removeChild(qrGrid.firstChild);
+  }
+
+  function makeLabel({es,en,url}, size){
+    const wrap = document.createElement('div');
+    wrap.className = "qr-label flex flex-col items-center";
+    // QR
+    const qrBox = document.createElement('div');
+    qrBox.style.width = `${size}px`;
+    qrBox.style.height = `${size}px`;
+    new QRCode(qrBox, { text: url, width: size, height: size, correctLevel: QRCode.CorrectLevel.M });
+    // Textos
+    const esEl = document.createElement('div'); esEl.className = "qr-es mt-2"; esEl.textContent = es;
+    const enEl = document.createElement('div'); enEl.className = "qr-en";     enEl.textContent = en;
+    const urlEl= document.createElement('div'); urlEl.className= "qr-url mt-1";urlEl.textContent = url;
+    wrap.append(qrBox, esEl, enEl, urlEl);
+    return wrap;
+  }
+
+  function parseLines(text){
+    return text.split('\n')
+      .map(l=>l.trim())
+      .filter(Boolean)
+      .map(l=>{
+        const [es,en,url] = l.split('|').map(s=> (s||'').trim());
+        return {es, en, url};
+      })
+      .filter(o=>o.es && o.en && o.url);
+  }
+
+  function generateQR(){
+    clearGrid();
+    const size = Math.max(96, Math.min(256, parseInt(qrSize.value || "128", 10)));
+    const cols = Math.max(2, Math.min(5, parseInt(qrCols.value || "4", 10)));
+    qrGrid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+    const list = parseLines(plantInput.value);
+    list.forEach(item=> qrGrid.appendChild(makeLabel(item, size)));
+  }
+
+  if (genQR) genQR.addEventListener('click', generateQR);
+  if (printQR) printQR.addEventListener('click', ()=>window.print());
 });
 
