@@ -14,11 +14,11 @@ body {
   color: #166534;
 }
 
-/* Secciones conmutables */
+/* Secciones conmutables (SPA) */
 .content-section { display: none; }
 .content-section.active { display: block; }
 
-/* Botones de cronograma */
+/* Botones del cronograma */
 .timeline-btn.active {
   background-color: #16a34a;
   color: #fff;
@@ -43,3 +43,18 @@ body {
 .accordion-btn[aria-expanded="true"] .chev {
   transform: rotate(180deg);
 }
+
+/* Puntos de la línea temporal de infografía */
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #118AB2;
+  border: 3px solid #f0f9ff;
+}
+
