@@ -491,58 +491,153 @@
         <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#06D6A0]">5</p><p class="font-bold text-slate-600">Disciplinas STEAM</p></div>
         <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#118AB2]">1</p><p class="font-bold text-slate-600">Comunidad</p></div>
       </section>
-<!-- Section: Puntuaciones (Gamificación) -->
+<!-- Section: Puntuaciones (Informativa) -->
 <section id="puntuaciones" class="content-section">
   <div class="text-center mb-8">
-    <h1 class="text-4xl font-extrabold text-stone-900">Puntuaciones del Proyecto</h1>
-    <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">
-      Suma puntos por categoría y motiva a tus alumnos y alumnas con insignias automáticas.
+    <h1 class="text-4xl font-extrabold text-stone-900">Gamificación del Proyecto</h1>
+    <p class="mt-3 max-w-3xl mx-auto text-lg text-stone-600">
+      Así funcionará el sistema de puntos, las insignias y los niveles durante el curso 2025–2026.
+      Sirve para motivar y reconocer logros de los equipos de alumnos y alumnas.
     </p>
-    <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
-      <input id="teamName" type="text" placeholder="Nuevo equipo (p. ej., Equipo A)" class="border rounded-md px-3 py-2 w-64">
-      <button id="addTeamBtn" class="px-4 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800">Añadir equipo</button>
-      <button id="resetScores" class="px-4 py-2 rounded-md bg-stone-200 text-stone-800 font-semibold hover:bg-stone-300">Reiniciar</button>
-      <button id="exportScores" class="px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Exportar JSON</button>
-      <label class="px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800 cursor-pointer">
-        Importar JSON
-        <input id="importScores" type="file" accept="application/json" class="hidden">
-      </label>
-      <button id="printScores" class="px-4 py-2 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800">Imprimir</button>
+  </div>
+
+  <!-- ¿Cómo funciona? -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-bold text-stone-900 mb-4">¿Cómo funciona?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold text-stone-900">Puntuación por categorías</h3>
+        <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
+          <li>🧪 <b>Ciencia</b>: prácticas de suelo, mediciones, análisis de datos (0–3 pts por hito).</li>
+          <li>⚙️ <b>Tecnología</b>: prototipos Arduino, riego, app de datos (0–3 pts por hito).</li>
+          <li>🎨 <b>Arte/Social</b>: diseño del espacio, cartelera, acciones solidarias (0–3 pts por hito).</li>
+          <li>🗣️ <b>Lingüístico</b>: cuaderno de campo, blog, presentaciones (0–3 pts por hito).</li>
+          <li>🤝 <b>Servicio</b>: apoyo a otros equipos, mercadillo, difusión (0–2 pts por acción).</li>
+        </ul>
+        <p class="mt-2 text-sm text-stone-500">Los puntos se conceden por evidencias objetivas (fotos, registros, entregables, demostraciones).</p>
+      </div>
+
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold text-stone-900">Dinámica</h3>
+        <ul class="mt-2 text-stone-700 list-disc list-inside space-y-1">
+          <li><b>Roles rotativos</b> en cada equipo (coordinación, materiales, datos, comunicación).</li>
+          <li><b>Retos quincenales</b> (mini-desafíos focalizados con 1–3 pts).</li>
+          <li><b>Misiones extra</b> (p. ej. tutorial de riego o guía de pH) con bonus de 1–2 pts.</li>
+          <li><b>Fair play</b>: +1 pt por apoyo a otro equipo cuando lo evidencien ambos equipos.</li>
+        </ul>
+      </div>
     </div>
-    <p class="mt-2 text-sm text-stone-500">
-      Categorías: 🧪 Ciencia · ⚙️ Tecnología · 🎨 Arte/Social · 🗣️ Lingüístico · 🤝 Servicio
-    </p>
   </div>
 
-  <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
-    <table class="min-w-full">
-      <thead class="bg-stone-50">
-        <tr class="text-left text-stone-600">
-          <th class="p-3 font-bold">Equipo</th>
-          <th class="p-3 font-bold">🧪 Ciencia</th>
-          <th class="p-3 font-bold">⚙️ Tecnología</th>
-          <th class="p-3 font-bold">🎨 Arte/Social</th>
-          <th class="p-3 font-bold">🗣️ Lingüístico</th>
-          <th class="p-3 font-bold">🤝 Servicio</th>
-          <th class="p-3 font-bold">Total</th>
-          <th class="p-3 font-bold">Insignias</th>
-          <th class="p-3 font-bold">Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="scoreBody" class="divide-y divide-stone-100"></tbody>
-    </table>
+  <!-- Insignias -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-bold text-stone-900 mb-4">Insignias que podrán conseguir</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">🌱 Maestr@s del pH</h3>
+        <p class="text-stone-700">Conseguir ≥ 10 puntos en Ciencia.</p>
+      </div>
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">💧 Makers del Riego</h3>
+        <p class="text-stone-700">Conseguir ≥ 10 puntos en Tecnología.</p>
+      </div>
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">🎭 Diseño con Alma</h3>
+        <p class="text-stone-700">Conseguir ≥ 10 puntos en Arte/Social.</p>
+      </div>
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">✍️ Crónicas del Huerto</h3>
+        <p class="text-stone-700">Conseguir ≥ 10 puntos en Lingüístico.</p>
+      </div>
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">👐 Manos que Ayudan</h3>
+        <p class="text-stone-700">Conseguir ≥ 8 puntos en Servicio.</p>
+      </div>
+      <div class="border rounded-lg p-4">
+        <h3 class="font-bold">⭐ Equipo Estrella</h3>
+        <p class="text-stone-700">Total ≥ 50 puntos.</p>
+      </div>
+    </div>
   </div>
 
-  <div class="mt-6 max-w-3xl mx-auto text-stone-600 text-sm">
-    <h3 class="font-bold text-stone-800 mb-2">Insignias automáticas</h3>
-    <ul class="list-disc list-inside">
-      <li>🌱 <b>Maestr@s del pH</b>: ≥ 10 puntos en Ciencia</li>
-      <li>💧 <b>Makers del Riego</b>: ≥ 10 puntos en Tecnología</li>
-      <li>🎭 <b>Diseño con Alma</b>: ≥ 10 puntos en Arte/Social</li>
-      <li>✍️ <b>Crónicas del Huerto</b>: ≥ 10 puntos en Lingüístico</li>
-      <li>👐 <b>Manos que Ayudan</b>: ≥ 8 puntos en Servicio</li>
-      <li>⭐ <b>Equipo Estrella</b>: Total ≥ 50 puntos</li>
+  <!-- Niveles -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+    <h2 class="text-2xl font-bold text-stone-900 mb-4">Niveles de equipo</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-stone-700">
+      <li class="border rounded-lg p-3"><b>Bronce</b>: 0–19 pts</li>
+      <li class="border rounded-lg p-3"><b>Plata</b>: 20–34 pts</li>
+      <li class="border rounded-lg p-3"><b>Oro</b>: 35–49 pts</li>
+      <li class="border rounded-lg p-3"><b>Platino</b>: 50–64 pts</li>
+      <li class="border rounded-lg p-3"><b>Diamante</b>: 65+ pts</li>
+      <li class="border rounded-lg p-3"><b>Mención del jurado</b>: hito excepcional documentado</li>
     </ul>
+    <p class="mt-2 text-sm text-stone-500">Los niveles se actualizan al cierre de cada reto quincenal.</p>
+  </div>
+
+  <!-- Ejemplos y normas -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h2 class="text-xl font-bold text-stone-900 mb-3">Ejemplos de retos con evidencias</h2>
+      <ul class="list-disc list-inside text-stone-700 space-y-1">
+        <li>Diseñar y validar un <b>protocolo de medida</b> de altura semanal con foto-registro (🧪 2–3 pts).</li>
+        <li>Montar el <b>riego automático</b> y publicar esquema/código (⚙️ 2–3 pts).</li>
+        <li>Crear <b>señalética</b> bilingüe con QR y estilo del proyecto (🎨 1–3 pts).</li>
+        <li>Subir dos <b>entradas de blog</b> con resultados y reflexiones (🗣️ 1–3 pts).</li>
+        <li>Apoyar a otro equipo durante una sesión crítica y documentarlo (🤝 +1 pt a ambos).</li>
+      </ul>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-lg p-6">
+      <h2 class="text-xl font-bold text-stone-900 mb-3">Normas y transparencia</h2>
+      <ul class="list-disc list-inside text-stone-700 space-y-1">
+        <li>Las puntuaciones las asignan las profesoras y profesores a partir de evidencias verificables.</li>
+        <li>Se prioriza la mejora continua y el trabajo cooperativo.</li>
+        <li>No se publican datos personales; se utilizan <b>nombres de equipo</b>.</li>
+        <li>Las insignias se otorgan en las <b>revisiones quincenales</b>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Clasificación de ejemplo (mock) -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mt-8">
+    <h2 class="text-xl font-bold text-stone-900 mb-3">Clasificación de ejemplo</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full">
+        <thead class="bg-stone-50 text-stone-600">
+          <tr>
+            <th class="p-3 text-left">Equipo</th>
+            <th class="p-3 text-left">🧪</th>
+            <th class="p-3 text-left">⚙️</th>
+            <th class="p-3 text-left">🎨</th>
+            <th class="p-3 text-left">🗣️</th>
+            <th class="p-3 text-left">🤝</th>
+            <th class="p-3 text-left">Total</th>
+            <th class="p-3 text-left">Insignias</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-stone-100">
+          <tr>
+            <td class="p-3 font-bold">Equipo A</td>
+            <td class="p-3">6</td><td class="p-3">7</td><td class="p-3">4</td><td class="p-3">5</td><td class="p-3">2</td>
+            <td class="p-3 font-extrabold">24</td>
+            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">🌱 Maestr@s del pH</span></td>
+          </tr>
+          <tr>
+            <td class="p-3 font-bold">Equipo B</td>
+            <td class="p-3">5</td><td class="p-3">9</td><td class="p-3">3</td><td class="p-3">4</td><td class="p-3">1</td>
+            <td class="p-3 font-extrabold">22</td>
+            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">💧 Makers del Riego</span></td>
+          </tr>
+          <tr>
+            <td class="p-3 font-bold">Equipo C</td>
+            <td class="p-3">4</td><td class="p-3">4</td><td class="p-3">5</td><td class="p-3">6</td><td class="p-3">2</td>
+            <td class="p-3 font-extrabold">21</td>
+            <td class="p-3"><span class="inline-block px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs">✍️ Crónicas del Huerto</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-xs text-stone-500 mt-2">Ejemplo meramente ilustrativo; las puntuaciones reales se asignarán durante el curso.</p>
   </div>
 </section>
 
@@ -747,6 +842,7 @@
 <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
 
