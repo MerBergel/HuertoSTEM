@@ -344,79 +344,11 @@ document.getElementById('loadCSV')?.addEventListener('click',()=>loadCSVtoChart(
 
 });
 
-/* ===========================
-   Puntuaciones (Gamificación)
-   =========================== */
-(function(){
-  const SCORE_KEY = 'huertoScores2025';
-  const scoreBody = document.getElementById('scoreBody');
-  const addTeamBtn = document.getElementById('addTeamBtn');
-  const teamName = document.getElementById('teamName');
-  const resetBtn = document.getElementById('resetScores');
-  const exportBtn = document.getElementById('exportScores');
-  const importInput = document.getElementById('importScores');
-  const printBtn = document.getElementById('printScores');
+const ENABLE_GAMIFICATION = false;
+if (ENABLE_GAMIFICATION) {
+  /* aquí dentro pegas el bloque anterior de puntuaciones interactivas */
+}
 
-  if (!scoreBody) return; // la sección puede no estar aún
-
-  // Utilidades
-  const uid = ()=> (crypto?.randomUUID?.() || ('id-' + Math.random().toString(36).slice(2)));
-
-  const defaultTeams = ()=> ([
-    { id: uid(), name: 'Equipo A', cte:0, tec:0, art:0, lin:0, serv:0 },
-    { id: uid(), name: 'Equipo B', cte:0, tec:0, art:0, lin:0, serv:0 },
-    { id: uid(), name: 'Equipo C', cte:0, tec:0, art:0, lin:0, serv:0 },
-    { id: uid(), name: 'Equipo D', cte:0, tec:0, art:0, lin:0, serv:0 }
-  ]);
-
-  const load = ()=> {
-    try { return JSON.parse(localStorage.getItem(SCORE_KEY)) || defaultTeams(); }
-    catch { return defaultTeams(); }
-  };
-  const save = (data)=> localStorage.setItem(SCORE_KEY, JSON.stringify(data));
-
-  let teams = load();
-
-  const total = (t)=> t.cte + t.tec + t.art + t.lin + t.serv;
-
-  const badges = (t)=>{
-    const out = [];
-    if (t.cte >= 10)  out.push({icon:'🌱', txt:'Maestr@s del pH'});
-    if (t.tec >= 10)  out.push({icon:'💧', txt:'Makers del Riego'});
-    if (t.art >= 10)  out.push({icon:'🎭', txt:'Diseño con Alma'});
-    if (t.lin >= 10)  out.push({icon:'✍️', txt:'Crónicas del Huerto'});
-    if (t.serv >= 8)  out.push({icon:'👐', txt:'Manos que Ayudan'});
-    if (total(t) >= 50) out.push({icon:'⭐', txt:'Equipo Estrella'});
-    return out;
-  };
-
-  const render = ()=>{
-    scoreBody.innerHTML = teams.map(t=>{
-      const b = badges(t).map(b=>`<span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-stone-100 text-stone-700 text-xs mr-1">${b.icon} ${b.txt}</span>`).join('');
-      const cell = (key, label)=> `
-        <td class="p-3">
-          <div class="flex items-center gap-2">
-            <button class="px-2 py-1 rounded-md bg-stone-200 hover:bg-stone-300 text-sm" data-action="minus" data-id="${t.id}" data-cat="${key}">−</button>
-            <span class="min-w-[2rem] text-center font-bold">${t[key]}</span>
-            <button class="px-2 py-1 rounded-md bg-green-600 hover:bg-green-700 text-white text-sm" data-action="plus" data-id="${t.id}" data-cat="${key}">+</button>
-          </div>
-        </td>`;
-      return `
-        <tr>
-          <td class="p-3 font-bold">${t.name}</td>
-          ${cell('cte','🧪')}
-          ${cell('tec','⚙️')}
-          ${cell('art','🎨')}
-          ${cell('lin','🗣️')}
-          ${cell('serv','🤝')}
-          <td class="p-3 font-extrabold">${total(t)}</td>
-          <td class="p-3">${b || '<span class="text-stone-400 text-sm">—</span>'}</td>
-          <td class="p-3">
-            <button class="px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white text-sm" data-action="remove" data-id="${t.id}">Eliminar</button>
-          </td>
-        </tr>`;
-    }).join('');
-  };
 
   // Eventos
   scoreBody.addEventListener('click', (e)=>{
@@ -572,5 +504,6 @@ document.getElementById('loadCSV')?.addEventListener('click',()=>loadCSVtoChart(
   // Inicio
   render('all');
 })();
+
 
 
