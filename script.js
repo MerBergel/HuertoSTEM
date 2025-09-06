@@ -324,5 +324,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (genQR) genQR.addEventListener('click', generateQR);
   if (printQR) printQR.addEventListener('click', ()=>window.print());
+  // En script.js
+async function loadCSVtoChart(chart, url){
+  const res = await fetch(url);
+  const text = await res.text();
+  const rows = text.trim().split('\n').slice(1).map(r=>r.split(','));
+  const semanas = []; const tomatera = []; const lechuga = [];
+  rows.forEach((r,i)=>{ // adapta estas columnas a tu CSV real
+    semanas.push(`Obs ${i+1}`);
+    tomatera.push(parseFloat(r[6]||0)); // Altura_cm
+    lechuga.push(parseFloat(r[7]||0));  // Numero_Hojas (ejemplo) o cambia a otra planta
+  });
+  chart.data.labels = semanas;
+  chart.data.datasets[0].data = tomatera;
+  chart.data.datasets[1].data = lechuga;
+  chart.update();
+}
+document.getElementById('loadCSV')?.addEventListener('click',()=>loadCSVtoChart(mainChart,'assets/cuaderno_campo_2025-2026.csv'));
+
 });
+
 
