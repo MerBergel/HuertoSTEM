@@ -8,6 +8,9 @@
   <!-- Tailwind + Chart.js + Fuentes -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- QRCode.js para generar QR en cliente -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet"/>
@@ -25,12 +28,13 @@
           <span class="text-2xl font-black text-green-700">Sembrando Futuro</span>
         </div>
         <nav class="hidden md:flex space-x-6">
-          <a href="#proyecto"     data-target="proyecto"     class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">El Proyecto</a>
-          <a href="#cronograma"   data-target="cronograma"   class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Cronograma</a>
-          <a href="#planificacion"data-target="planificacion"class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Planificación</a>
-          <a href="#areas"        data-target="areas"        class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Áreas STEAM</a>
-          <a href="#evaluacion"   data-target="evaluacion"   class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Evaluación</a>
-          <a href="#infografia"   data-target="infografia"   class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Infografía</a>
+          <a href="#proyecto"      data-target="proyecto"      class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">El Proyecto</a>
+          <a href="#cronograma"    data-target="cronograma"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Cronograma</a>
+          <a href="#planificacion" data-target="planificacion" class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Planificación</a>
+          <a href="#areas"         data-target="areas"         class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Áreas STEAM</a>
+          <a href="#evaluacion"    data-target="evaluacion"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Evaluación</a>
+          <a href="#infografia"    data-target="infografia"    class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Infografía</a>
+          <a href="#recursos"      data-target="recursos"      class="nav-link font-bold text-stone-600 hover:text-green-700 py-2">Recursos</a>
         </nav>
       </div>
     </div>
@@ -419,7 +423,7 @@
     <!-- ÁREAS STEAM -->
     <section id="areas" class="content-section">
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-extrabold text-stone-900">Explora las Áreas STEAM</h1>
+        <h1 class="class text-4xl font-extrabold text-stone-900">Explora las Áreas STEAM</h1>
         <p class="mt-4 max-w-2xl mx-auto text-xl text-stone-600">Haz clic en un área para ver actividades asociadas.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
@@ -467,7 +471,7 @@
       </div>
     </section>
 
-    <!-- INFOGRAFÍA (fusionada) -->
+    <!-- INFOGRAFÍA -->
     <section id="infografia" class="content-section">
       <div class="text-center my-12">
         <h1 class="text-4xl md:text-6xl font-black text-[#073B4C] tracking-tight">Proyecto Huerto STEAM</h1>
@@ -535,7 +539,7 @@
         </div>
       </section>
 
-      <!-- 4 claves + donuts -->
+      <!-- 4 claves + donut -->
       <section class="my-16">
         <h2 class="text-3xl font-bold text-center text-[#073B4C] mb-4">Las 4 Claves del Proyecto</h2>
         <p class="text-center text-slate-700 max-w-2xl mx-auto mb-8">Integración equilibrada de las áreas.</p>
@@ -561,6 +565,83 @@
         </div>
       </section>
     </section>
+
+    <!-- RECURSOS (descargas + QR) -->
+    <section id="recursos" class="content-section">
+      <div class="text-center mb-10">
+        <h1 class="text-4xl font-extrabold text-stone-900">Recursos del Proyecto</h1>
+        <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">Descargas listas y generador de etiquetas QR bilingües.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Rúbricas -->
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+          <h3 class="text-xl font-bold text-stone-900 mb-2">Rúbricas (PDF)</h3>
+          <p class="text-stone-600 mb-4">Trabajo en equipo, presentación oral, cuaderno de campo y prototipo Arduino.</p>
+          <!-- Sustituye href por la URL donde subas el PDF -->
+          <a id="dlRubricas" href="assets/rubricas_huerto_steam_2025-2026.pdf" class="inline-flex items-center justify-center px-4 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800 w-full">Descargar PDF</a>
+          <p class="text-xs text-stone-500 mt-2">Sube el archivo a <code>assets/</code> o cambia el enlace.</p>
+        </div>
+
+        <!-- Cuaderno de Campo -->
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+          <h3 class="text-xl font-bold text-stone-900 mb-2">Cuaderno de Campo</h3>
+          <p class="text-stone-600 mb-4">Plantilla para registrar datos del huerto.</p>
+          <div class="space-y-2">
+            <a id="dlExcel" href="assets/cuaderno_campo_2025-2026.xlsx" class="block text-center px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Descargar (.xlsx)</a>
+            <a id="dlCSV" href="assets/cuaderno_campo_2025-2026.csv" class="block text-center px-4 py-2 rounded-md bg-stone-200 text-stone-900 font-semibold hover:bg-stone-300">Descargar (.csv)</a>
+          </div>
+          <p class="text-xs text-stone-500 mt-2">También puedes subir el .xlsx a Drive y abrirlo con Google Sheets.</p>
+        </div>
+
+        <!-- Etiquetas QR -->
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+          <h3 class="text-xl font-bold text-stone-900 mb-2">Etiquetas QR bilingües</h3>
+          <p class="text-stone-600 mb-4">Genera etiquetas (ES/EN) con QR hacia tus páginas o fichas.</p>
+          <button id="openQR" class="w-full px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800">Abrir generador</button>
+          <p class="text-xs text-stone-500 mt-2">Imprime en A4 tras generar (botón “Imprimir”).</p>
+        </div>
+      </div>
+
+      <!-- Modal QR -->
+      <div id="qrModal" class="fixed inset-0 bg-black/50 hidden items-start md:items-center justify-center p-4 z-50">
+        <div class="bg-white w-full max-w-6xl rounded-xl shadow-2xl">
+          <div class="flex items-center justify-between px-6 py-4 border-b">
+            <h3 class="text-xl font-bold">Generador de Etiquetas QR (ES/EN)</h3>
+            <button id="closeQR" class="text-stone-500 hover:text-stone-800 text-2xl leading-none">&times;</button>
+          </div>
+          <div class="p-6 space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="md:col-span-2">
+                <label class="block text-sm font-semibold mb-1">Lista de plantas (una por línea · formato: <code>ES | EN | URL</code>)</label>
+                <textarea id="plantInput" rows="8" class="w-full border rounded-md p-3 text-sm" placeholder="Tomatera | Tomato | https://tu-centro.es/huerto/tomatera"></textarea>
+                <p class="text-xs text-stone-500 mt-1">Consejo: usa URLs internas del centro o del blog del proyecto.</p>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-1">Opciones</label>
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm">Tamaño QR (px)</span>
+                    <input id="qrSize" type="number" min="96" max="256" value="128" class="w-24 border rounded-md p-1 text-sm text-right">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm">Columnas por página</span>
+                    <input id="qrCols" type="number" min="2" max="5" value="4" class="w-24 border rounded-md p-1 text-sm text-right">
+                  </div>
+                </div>
+                <div class="mt-4 space-x-2">
+                  <button id="genQR" class="px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800">Generar</button>
+                  <button id="printQR" class="px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Imprimir</button>
+                </div>
+              </div>
+            </div>
+
+            <div id="qrGrid" class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 print:grid-cols-4"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
   </main>
 
   <!-- Footer -->
@@ -581,5 +662,4 @@
 <script src="script.js" defer></script>
 </body>
 </html>
-
 
