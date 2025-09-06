@@ -491,6 +491,60 @@
         <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#06D6A0]">5</p><p class="font-bold text-slate-600">Disciplinas STEAM</p></div>
         <div class="bg-white p-6 rounded-lg shadow-lg"><p class="text-4xl font-extrabold text-[#118AB2]">1</p><p class="font-bold text-slate-600">Comunidad</p></div>
       </section>
+<!-- Section: Puntuaciones (Gamificación) -->
+<section id="puntuaciones" class="content-section">
+  <div class="text-center mb-8">
+    <h1 class="text-4xl font-extrabold text-stone-900">Puntuaciones del Proyecto</h1>
+    <p class="mt-3 max-w-2xl mx-auto text-lg text-stone-600">
+      Suma puntos por categoría y motiva a tus alumnos y alumnas con insignias automáticas.
+    </p>
+    <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+      <input id="teamName" type="text" placeholder="Nuevo equipo (p. ej., Equipo A)" class="border rounded-md px-3 py-2 w-64">
+      <button id="addTeamBtn" class="px-4 py-2 rounded-md bg-green-700 text-white font-semibold hover:bg-green-800">Añadir equipo</button>
+      <button id="resetScores" class="px-4 py-2 rounded-md bg-stone-200 text-stone-800 font-semibold hover:bg-stone-300">Reiniciar</button>
+      <button id="exportScores" class="px-4 py-2 rounded-md bg-stone-900 text-white font-semibold hover:bg-black">Exportar JSON</button>
+      <label class="px-4 py-2 rounded-md bg-blue-700 text-white font-semibold hover:bg-blue-800 cursor-pointer">
+        Importar JSON
+        <input id="importScores" type="file" accept="application/json" class="hidden">
+      </label>
+      <button id="printScores" class="px-4 py-2 rounded-md bg-emerald-700 text-white font-semibold hover:bg-emerald-800">Imprimir</button>
+    </div>
+    <p class="mt-2 text-sm text-stone-500">
+      Categorías: 🧪 Ciencia · ⚙️ Tecnología · 🎨 Arte/Social · 🗣️ Lingüístico · 🤝 Servicio
+    </p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-lg overflow-x-auto">
+    <table class="min-w-full">
+      <thead class="bg-stone-50">
+        <tr class="text-left text-stone-600">
+          <th class="p-3 font-bold">Equipo</th>
+          <th class="p-3 font-bold">🧪 Ciencia</th>
+          <th class="p-3 font-bold">⚙️ Tecnología</th>
+          <th class="p-3 font-bold">🎨 Arte/Social</th>
+          <th class="p-3 font-bold">🗣️ Lingüístico</th>
+          <th class="p-3 font-bold">🤝 Servicio</th>
+          <th class="p-3 font-bold">Total</th>
+          <th class="p-3 font-bold">Insignias</th>
+          <th class="p-3 font-bold">Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="scoreBody" class="divide-y divide-stone-100"></tbody>
+    </table>
+  </div>
+
+  <div class="mt-6 max-w-3xl mx-auto text-stone-600 text-sm">
+    <h3 class="font-bold text-stone-800 mb-2">Insignias automáticas</h3>
+    <ul class="list-disc list-inside">
+      <li>🌱 <b>Maestr@s del pH</b>: ≥ 10 puntos en Ciencia</li>
+      <li>💧 <b>Makers del Riego</b>: ≥ 10 puntos en Tecnología</li>
+      <li>🎭 <b>Diseño con Alma</b>: ≥ 10 puntos en Arte/Social</li>
+      <li>✍️ <b>Crónicas del Huerto</b>: ≥ 10 puntos en Lingüístico</li>
+      <li>👐 <b>Manos que Ayudan</b>: ≥ 8 puntos en Servicio</li>
+      <li>⭐ <b>Equipo Estrella</b>: Total ≥ 50 puntos</li>
+    </ul>
+  </div>
+</section>
 
       <!-- Justificación -->
       <section class="my-12">
@@ -667,6 +721,7 @@
 <script src="script.js" defer></script>
 </body>
 </html>
+
 
 
 
